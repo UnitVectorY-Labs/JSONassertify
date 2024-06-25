@@ -1,7 +1,22 @@
-JSONassert
-==========
+JSONassertify
+=============
 
 Write JSON unit tests in less code.  Great for testing REST interfaces.
+
+Fork
+----
+
+[JSONassertify](https://github.com/UnitVectorY-Labs/JSONassertify) is a fork of [JSONassert](https://github.com/skyscreamer/JSONassert) version 1.5.1 that is actively under development.  This fork intends to modernize the codebase including some breaking changes.  This is following the release of the [1.5.2](https://github.com/skyscreamer/JSONassert/pull/188) which changed the minimum version to Java 21 which has been discussed [here](https://github.com/skyscreamer/JSONassert/issues/190). The goal of this fork is to not maintain perfect compatibility, but rather upgrade and modernize the components.
+
+ - New project name and new package for the project (part of the fork)
+ - Update dependencies to latest version to address security issues
+ - Use Dependabot to ensure dependencies remain up-to-date
+ - Upgrade to JUnit 5
+ - Move to use org.json library
+ - Utilize GitHub actions for building
+ - Move to a newer version of Java (specific version TBD)
+
+THIS IS A WORK IN PROGRESS AND HAS NOT REACHED THE INITIAL RELEASE
 
 Summary
 -------
@@ -65,50 +80,4 @@ returns the following:
     friends[id=3].pets[]: Expected bird, but not found ; friends[id=3].pets[]: Contains cat, but not expected
 
 Which tells you that the pets array under the friend where id=3 was supposed to contain "bird", but had "cat" instead.  (Maybe the cat ate the bird?)
-
-* * *
-
-QuickStart
-----------
-
-To use, [download the JAR](https://github.com/skyscreamer/JSONassert/releases) or add the following to your project's pom.xml:
-
-    <dependency>
-        <groupId>org.skyscreamer</groupId>
-        <artifactId>jsonassert</artifactId>
-        <version>1.5.1</version>
-        <scope>test</scope>
-    </dependency>
-
-Write tests like this:
-
-<code>JSONAssert.assertEquals(<i>expectedJSONString</i>, <i>actualJSON</i>, <i>strictMode</i>);</code>
-
-[More examples in our cookbook](http://jsonassert.skyscreamer.org/cookbook.html)
-
-* * *
-
-Who uses JSONassert?
---------------------
- + [yoga](https://github.com/skyscreamer/yoga) - A relational REST framework
- + [hamcrest-json](https://github.com/hertzsprung/hamcrest-json) - Hamcrest matchers for comparing JSON documents
- + [Mule ESB](http://www.mulesoft.org/)
- + [GroupDocs](http://groupdocs.com/)
- + [Shazam](http://www.shazam.com/)
- + [Thucydides](http://thucydides.net/)
-
-* * *
-
-org.json
---------
-
-This implementation uses a clean-room implementation of the org.json
-library implemented for the Android system, released under the Apache 2.0 license. See
-[com.vaadin.external.google:android-json](http://search.maven.org/#artifactdetails%7Ccom.vaadin.external.google%7Candroid-json%7C0.0.20131108.vaadin1%7Cjar)
-That jar does **not** include the org.json.JSONString interface, so a new implementation of that interface is added to this source.
-
-Resources
----------
-
-[JavaDoc](http://jsonassert.skyscreamer.org/apidocs/index.html)
 
