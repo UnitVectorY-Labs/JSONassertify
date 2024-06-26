@@ -17,8 +17,6 @@ package com.unitvectory.jsonassertify;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import com.unitvectory.jsonassertify.ValueMatcher;
-
 /**
  * A JSONassert value matcher that matches actual value to regular expression.
  * If non-null regular expression passed to constructor, then all actual values

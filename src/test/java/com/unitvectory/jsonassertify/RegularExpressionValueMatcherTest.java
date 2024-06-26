@@ -18,8 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
-import com.unitvectory.jsonassertify.Customization;
-import com.unitvectory.jsonassertify.JSONCompareMode;
 import com.unitvectory.jsonassertify.comparator.CustomComparator;
 
 /**
