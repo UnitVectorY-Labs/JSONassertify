@@ -17,7 +17,7 @@ package org.skyscreamer.jsonassert;
 /**
  * <p>These different modes define different behavior for the comparison of JSON for testing.
  * Each mode encapsulates two underlying behaviors: extensibility and strict ordering.</p>
- *
+ * <!-- HTML table incompatible with stricter Java 8 javadoc
  * <table border="1" summary="Behavior of JSONCompareMode">
  *     <tr><th>&nbsp;</th><th>Extensible</th><th>Strict Ordering</th></tr>
  *     <tr><th>STRICT</th><th>no</th><th>yes</th></tr>
@@ -25,6 +25,7 @@ package org.skyscreamer.jsonassert;
  *     <tr><th>NON_EXTENSIBLE</th><th>no</th><th>no</th></tr>
  *     <tr><th>STRICT_ORDER</th><th>yes</th><th>yes</th></tr>
  * </table>
+ * -->
  *
  * <p>If extensibility not allowed, then all of the expected values must match in what's being tested,
  * but any additional fields will cause the test to fail.  When extensibility is allowed, all values
