@@ -106,7 +106,8 @@ public class JSONCompareTest {
     @Test
     public void reportsWrongSimpleValueCountInUnorderedArray() throws JSONException {
         JSONCompareResult result = compareJSON("[5, 5]", "[5, 7]", LENIENT);
-        assertThat(result, failsWithMessage(equalTo("[]: Expected 2 occurrence(s) of 5 but got 1 occurrence(s) ; []\nUnexpected: 7\n")));
+        assertThat(result, failsWithMessage(
+                equalTo("[]: Expected 2 occurrence(s) of 5 but got 1 occurrence(s) ; []\nUnexpected: 7\n")));
         assertEquals(result.getFieldUnexpected().size(), 1);
     }
 
@@ -121,13 +122,16 @@ public class JSONCompareTest {
 
     @Test
     public void reportsUnmatchedJSONObjectInUnorderedArray() throws JSONException {
-        JSONCompareResult result = compareJSON("[{\"address\" : {\"street\" : \"Acacia Avenue\"}}]", "[{\"age\" : 23}]", LENIENT);
-        assertThat(result, failsWithMessage(equalTo("[0] Could not find match for element {\"address\":{\"street\":\"Acacia Avenue\"}}")));
+        JSONCompareResult result = compareJSON("[{\"address\" : {\"street\" : \"Acacia Avenue\"}}]", "[{\"age\" : 23}]",
+                LENIENT);
+        assertThat(result, failsWithMessage(
+                equalTo("[0] Could not find match for element {\"address\":{\"street\":\"Acacia Avenue\"}}")));
     }
 
     @Test
     public void succeedsWithNestedJSONObjectsInUnorderedArray() throws JSONException {
-        assertTrue(compareJSON("[{\"address\" : {\"street\" : \"Acacia Avenue\"}}, 5]", "[5, {\"address\" : {\"street\" : \"Acacia Avenue\"}}]", LENIENT).passed());
+        assertTrue(compareJSON("[{\"address\" : {\"street\" : \"Acacia Avenue\"}}, 5]",
+                "[5, {\"address\" : {\"street\" : \"Acacia Avenue\"}}]", LENIENT).passed());
     }
 
     @Test
@@ -144,7 +148,8 @@ public class JSONCompareTest {
 
     @Test
     public void reportsUnmatchesIntegerValueInUnorderedArrayContainingJSONObject() throws JSONException {
-        JSONCompareResult result = compareJSON("[{\"address\" : {\"street\" : \"Acacia Avenue\"}}, 5]", "[{\"address\" : {\"street\" : \"Acacia Avenue\"}}, 2]", LENIENT);
+        JSONCompareResult result = compareJSON("[{\"address\" : {\"street\" : \"Acacia Avenue\"}}, 5]",
+                "[{\"address\" : {\"street\" : \"Acacia Avenue\"}}, 2]", LENIENT);
         assertThat(result, failsWithMessage(equalTo("[1] Could not find match for element 5")));
     }
 
@@ -155,7 +160,8 @@ public class JSONCompareTest {
     }
 
     @Test
-    public void reportsUnmatchedJSONArrayWhereExpectedContainsJSONObjectWithUniqueKeyButActualContainsElementOfOtherType() throws JSONException {
+    public void reportsUnmatchedJSONArrayWhereExpectedContainsJSONObjectWithUniqueKeyButActualContainsElementOfOtherType()
+            throws JSONException {
         JSONCompareResult result = compareJSON("[{\"id\": 3}]", "[5]", LENIENT);
         assertThat(result, failsWithMessage(equalTo("[0] Could not find match for element {\"id\":3}")));
     }

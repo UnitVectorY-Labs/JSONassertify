@@ -38,7 +38,8 @@ public final class JSONCompareUtil {
     }
 
     /**
-     * Converts the provided {@link JSONArray} to a Map of {@link JSONObject}s where the key of each object
+     * Converts the provided {@link JSONArray} to a Map of {@link JSONObject}s where
+     * the key of each object
      * is the value at {@code uniqueKey} in each object.
      *
      * @param array     the JSON array to convert
@@ -46,7 +47,8 @@ public final class JSONCompareUtil {
      * @return the map of {@link JSONObject}s from {@code array}
      * @throws JSONException JSON parsing error
      */
-    public static Map<Object, JSONObject> arrayOfJsonObjectToMap(JSONArray array, String uniqueKey) throws JSONException {
+    public static Map<Object, JSONObject> arrayOfJsonObjectToMap(JSONArray array, String uniqueKey)
+            throws JSONException {
         Map<Object, JSONObject> valueMap = new HashMap<Object, JSONObject>();
         for (int i = 0; i < array.length(); ++i) {
             JSONObject jsonObject = (JSONObject) array.get(i);
@@ -67,24 +69,29 @@ public final class JSONCompareUtil {
         // Find a unique key for the object (id, name, whatever)
         JSONObject o = (JSONObject) expected.get(0); // There's at least one at this point
         for (String candidate : getKeys(o)) {
-            if (isUsableAsUniqueKey(candidate, expected)) return candidate;
+            if (isUsableAsUniqueKey(candidate, expected))
+                return candidate;
         }
         // No usable unique key :-(
         return null;
     }
 
     /**
-     * <p>Looks to see if candidate field is a possible unique key across a array of objects.
-     * Returns true IFF:</p>
+     * <p>
+     * Looks to see if candidate field is a possible unique key across a array of
+     * objects.
+     * Returns true IFF:
+     * </p>
      * <ol>
-     *   <li>array is an array of JSONObject
-     *   <li>candidate is a top-level field in each of of the objects in the array
-     *   <li>candidate is a simple value (not JSONObject or JSONArray)
-     *   <li>candidate is unique across all elements in the array
+     * <li>array is an array of JSONObject
+     * <li>candidate is a top-level field in each of of the objects in the array
+     * <li>candidate is a simple value (not JSONObject or JSONArray)
+     * <li>candidate is unique across all elements in the array
      * </ol>
      *
      * @param candidate is usable as a unique key if every element in the
-     * @param array is a JSONObject having that key, and no two values are the same.
+     * @param array     is a JSONObject having that key, and no two values are the
+     *                  same.
      * @return true if the candidate can work as a unique id across array
      * @throws JSONException JSON parsing error
      */
@@ -127,10 +134,11 @@ public final class JSONCompareUtil {
     }
 
     /**
-     * Returns the value present in the given index position. If null value is present, it will return null
+     * Returns the value present in the given index position. If null value is
+     * present, it will return null
      *
      * @param jsonArray the JSON array to get value from
-     * @param index index of object to retrieve
+     * @param index     index of object to retrieve
      * @return value at the given index position
      * @throws JSONException JSON parsing error
      */
@@ -156,7 +164,8 @@ public final class JSONCompareUtil {
     }
 
     /**
-     * Returns whether the given object is a simple value: not {@link JSONObject} and not {@link JSONArray}.
+     * Returns whether the given object is a simple value: not {@link JSONObject}
+     * and not {@link JSONArray}.
      *
      * @param o the object to inspect
      * @return true if {@code o} is a simple value
@@ -166,7 +175,8 @@ public final class JSONCompareUtil {
     }
 
     /**
-     * Returns whether all elements in {@code array} are {@link JSONObject} instances.
+     * Returns whether all elements in {@code array} are {@link JSONObject}
+     * instances.
      *
      * @param array the array to inspect
      * @return true if all the elements in the given array are JSONObjects
@@ -182,7 +192,8 @@ public final class JSONCompareUtil {
     }
 
     /**
-     * Returns whether all elements in {@code array} are {@link JSONArray} instances.
+     * Returns whether all elements in {@code array} are {@link JSONArray}
+     * instances.
      *
      * @param array the array to inspect
      * @return true if all the elements in the given array are JSONArrays

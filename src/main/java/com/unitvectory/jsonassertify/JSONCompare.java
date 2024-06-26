@@ -22,11 +22,14 @@ import com.unitvectory.jsonassertify.comparator.DefaultComparator;
 import com.unitvectory.jsonassertify.comparator.JSONComparator;
 
 /**
- * Provides API to compare two JSON entities.  This is the backend to {@link JSONAssert}, but it can
- * be programmed against directly to access the functionality.  (eg, to make something that works with a
+ * Provides API to compare two JSON entities. This is the backend to
+ * {@link JSONAssert}, but it can
+ * be programmed against directly to access the functionality. (eg, to make
+ * something that works with a
  * non-JUnit test framework)
  */
 public final class JSONCompare {
+    
     private JSONCompare() {
     }
 
@@ -35,14 +38,17 @@ public final class JSONCompare {
     }
 
     /**
-     * Compares JSON string provided to the expected JSON string using provided comparator, and returns the results of
+     * Compares JSON string provided to the expected JSON string using provided
+     * comparator, and returns the results of
      * the comparison.
+     * 
      * @param expectedStr Expected JSON string
-     * @param actualStr JSON string to compare
-     * @param comparator Comparator to use
+     * @param actualStr   JSON string to compare
+     * @param comparator  Comparator to use
      * @return result of the comparison
-     * @throws JSONException JSON parsing error
-     * @throws IllegalArgumentException when type of expectedStr doesn't match the type of actualStr
+     * @throws JSONException            JSON parsing error
+     * @throws IllegalArgumentException when type of expectedStr doesn't match the
+     *                                  type of actualStr
      */
     public static JSONCompareResult compareJSON(String expectedStr, String actualStr, JSONComparator comparator)
             throws JSONException {
@@ -50,26 +56,24 @@ public final class JSONCompare {
         Object actual = JSONParser.parseJSON(actualStr);
         if ((expected instanceof JSONObject) && (actual instanceof JSONObject)) {
             return compareJSON((JSONObject) expected, (JSONObject) actual, comparator);
-        }
-        else if ((expected instanceof JSONArray) && (actual instanceof JSONArray)) {
-            return compareJSON((JSONArray)expected, (JSONArray)actual, comparator);
-        }
-        else if (expected instanceof JSONString && actual instanceof JSONString) {
+        } else if ((expected instanceof JSONArray) && (actual instanceof JSONArray)) {
+            return compareJSON((JSONArray) expected, (JSONArray) actual, comparator);
+        } else if (expected instanceof JSONString && actual instanceof JSONString) {
             return compareJson((JSONString) expected, (JSONString) actual);
-        }
-        else if (expected instanceof JSONObject) {
+        } else if (expected instanceof JSONObject) {
             return new JSONCompareResult().fail("", expected, actual);
-        }
-        else {
+        } else {
             return new JSONCompareResult().fail("", expected, actual);
         }
     }
 
-  /**
-     * Compares JSON object provided to the expected JSON object using provided comparator, and returns the results of
+    /**
+     * Compares JSON object provided to the expected JSON object using provided
+     * comparator, and returns the results of
      * the comparison.
-     * @param expected expected json object
-     * @param actual actual json object
+     * 
+     * @param expected   expected json object
+     * @param actual     actual json object
      * @param comparator comparator to use
      * @return result of the comparison
      * @throws JSONException JSON parsing error
@@ -80,10 +84,12 @@ public final class JSONCompare {
     }
 
     /**
-     * Compares JSON object provided to the expected JSON object using provided comparator, and returns the results of
+     * Compares JSON object provided to the expected JSON object using provided
+     * comparator, and returns the results of
      * the comparison.
-     * @param expected expected json array
-     * @param actual actual json array
+     * 
+     * @param expected   expected json array
+     * @param actual     actual json array
      * @param comparator comparator to use
      * @return result of the comparison
      * @throws JSONException JSON parsing error
@@ -94,7 +100,8 @@ public final class JSONCompare {
     }
 
     /**
-     * Compares {@link JSONString} provided to the expected {@code JSONString}, checking that the
+     * Compares {@link JSONString} provided to the expected {@code JSONString},
+     * checking that the
      * {@link org.json.JSONString#toJSONString()} are equal.
      *
      * @param expected Expected {@code JSONstring}
@@ -106,13 +113,14 @@ public final class JSONCompare {
         final String expectedJson = expected.toJSONString();
         final String actualJson = actual.toJSONString();
         if (!expectedJson.equals(actualJson)) {
-          result.fail("");
+            result.fail("");
         }
         return result;
     }
 
     /**
-     * Compares JSON string provided to the expected JSON string, and returns the results of the comparison.
+     * Compares JSON string provided to the expected JSON string, and returns the
+     * results of the comparison.
      *
      * @param expectedStr Expected JSON string
      * @param actualStr   JSON string to compare
@@ -126,7 +134,8 @@ public final class JSONCompare {
     }
 
     /**
-     * Compares JSONObject provided to the expected JSONObject, and returns the results of the comparison.
+     * Compares JSONObject provided to the expected JSONObject, and returns the
+     * results of the comparison.
      *
      * @param expected Expected JSONObject
      * @param actual   JSONObject to compare
@@ -139,9 +148,9 @@ public final class JSONCompare {
         return compareJSON(expected, actual, getComparatorForMode(mode));
     }
 
-
     /**
-     * Compares JSONArray provided to the expected JSONArray, and returns the results of the comparison.
+     * Compares JSONArray provided to the expected JSONArray, and returns the
+     * results of the comparison.
      *
      * @param expected Expected JSONArray
      * @param actual   JSONArray to compare

@@ -30,16 +30,17 @@ public class DependencyTest {
         // Cloudbees doesn't like a unit test class with no tests
     }
 
-    //@Test  // For https://github.com/skyscreamer/JSONassert/issues/25
+    // @Test // For https://github.com/skyscreamer/JSONassert/issues/25
     public void testJSonGetLong() throws Exception {
         Long target = -4611686018427386614L;
         String targetString = target.toString();
 
         JSONObject value = new JSONObject().put("id", target);
-        assertEquals(target, (Long) value.getLong("id"));  //Correct: when put as long getLong is correct
+        assertEquals(target, (Long) value.getLong("id")); // Correct: when put as long getLong is correct
 
         value = new JSONObject().put("id", targetString);
-        assertEquals(target, (Long) Long.parseLong(value.getString("id"))); //Correct: when put as String getString is correct
-        assertEquals(target, (Long) value.getLong("id")); //Bug: Having json convert the string to long fails
+        assertEquals(target, (Long) Long.parseLong(value.getString("id"))); // Correct: when put as String getString is
+                                                                            // correct
+        assertEquals(target, (Long) value.getLong("id")); // Bug: Having json convert the string to long fails
     }
 }

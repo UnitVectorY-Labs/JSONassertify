@@ -27,21 +27,21 @@ public class CustomComparator extends DefaultComparator {
 
     private final Collection<Customization> customizations;
 
-    public CustomComparator(JSONCompareMode mode,  Customization... customizations) {
+    public CustomComparator(JSONCompareMode mode, Customization... customizations) {
         super(mode);
         this.customizations = Arrays.asList(customizations);
     }
 
     @Override
-    public void compareValues(String prefix, Object expectedValue, Object actualValue, JSONCompareResult result) throws JSONException {
+    public void compareValues(String prefix, Object expectedValue, Object actualValue, JSONCompareResult result)
+            throws JSONException {
         Customization customization = getCustomization(prefix);
         if (customization != null) {
             try {
-    	        if (!customization.matches(prefix, actualValue, expectedValue, result)) {
+                if (!customization.matches(prefix, actualValue, expectedValue, result)) {
                     result.fail(prefix, expectedValue, actualValue);
                 }
-            }
-            catch (ValueMatcherException e) {
+            } catch (ValueMatcherException e) {
                 result.fail(prefix, e);
             }
         } else {

@@ -18,6 +18,7 @@ package com.unitvectory.jsonassertify;
  * Models a failure when comparing two fields.
  */
 public class FieldComparisonFailure {
+    
     private final String _field;
     private final Object _expected;
     private final Object _actual;

@@ -61,58 +61,70 @@ public class RegularExpressionValueMatcherTest {
 
 	@Test
 	public void constantRegexMatchesStringAttributeInsideArray() throws JSONException {
-		doTest(ARRAY_ELEMENT_PREFIX, "http://localhost:80/Person\\('\\d+'\\)", CONSTANT_URI_REGEX_EXPECTED_JSON, JSON_STRING_WITH_ARRAY);
+		doTest(ARRAY_ELEMENT_PREFIX, "http://localhost:80/Person\\('\\d+'\\)", CONSTANT_URI_REGEX_EXPECTED_JSON,
+				JSON_STRING_WITH_ARRAY);
 	}
 
-    @Test
-    public void dynamicRegexMatchesStringAttributeInsideArray() throws JSONException {
-        doTest(ARRAY_ELEMENT_PREFIX, null, "{d:{results:[{__metadata:{uri:\"http://localhost:80/Person\\\\('\\\\d+'\\\\)\"}}]}}", JSON_STRING_WITH_ARRAY);
-    }
+	@Test
+	public void dynamicRegexMatchesStringAttributeInsideArray() throws JSONException {
+		doTest(ARRAY_ELEMENT_PREFIX, null,
+				"{d:{results:[{__metadata:{uri:\"http://localhost:80/Person\\\\('\\\\d+'\\\\)\"}}]}}",
+				JSON_STRING_WITH_ARRAY);
+	}
 
-    @Test
-    public void dynamicRegexMatchesStringAttributeInsideArrayWithNoArgConstructor() throws JSONException {
-		JSONAssert.assertEquals("{d:{results:[{__metadata:{uri:\"http://localhost:80/Person\\\\('\\\\d+'\\\\)\"}}]}}", JSON_STRING_WITH_ARRAY, new CustomComparator(
-				JSONCompareMode.STRICT_ORDER, new Customization(ARRAY_ELEMENT_PREFIX,
-						new RegularExpressionValueMatcher<Object>())));
-    }
+	@Test
+	public void dynamicRegexMatchesStringAttributeInsideArrayWithNoArgConstructor() throws JSONException {
+		JSONAssert.assertEquals("{d:{results:[{__metadata:{uri:\"http://localhost:80/Person\\\\('\\\\d+'\\\\)\"}}]}}",
+				JSON_STRING_WITH_ARRAY, new CustomComparator(
+						JSONCompareMode.STRICT_ORDER, new Customization(ARRAY_ELEMENT_PREFIX,
+								new RegularExpressionValueMatcher<Object>())));
+	}
 
-    @Test
-    public void failsWhenDynamicRegexInvalid() throws JSONException {
-    	try {
-    		doTest(ARRAY_ELEMENT_PREFIX, null, "{d:{results:[{__metadata:{uri:\"http://localhost:80/Person('\\\\d+'\\\\)\"}}]}}", JSON_STRING_WITH_ARRAY);
-    	}
-    	catch (AssertionError e) {
-    		assertTrue(e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Dynamic expected pattern invalid: "), "Invalid exception message returned: "+ e.getMessage());
-    	}
-    }
+	@Test
+	public void failsWhenDynamicRegexInvalid() throws JSONException {
+		try {
+			doTest(ARRAY_ELEMENT_PREFIX, null,
+					"{d:{results:[{__metadata:{uri:\"http://localhost:80/Person('\\\\d+'\\\\)\"}}]}}",
+					JSON_STRING_WITH_ARRAY);
+		} catch (AssertionError e) {
+			assertTrue(e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Dynamic expected pattern invalid: "),
+					"Invalid exception message returned: " + e.getMessage());
+		}
+	}
 
-    @Test
-    public void failsWhenDynamicRegexDoesNotMatchStringAttributeInsideArray() throws JSONException {
-    	try {
-    		doTest(ARRAY_ELEMENT_PREFIX, null, "{d:{results:[{__metadata:{uri:\"http://localhost:80/Person\\\\('\\\\w+'\\\\)\"}}]}}", JSON_STRING_WITH_ARRAY);
-    	}
-    	catch (AssertionError e) {
-    		assertTrue(e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Dynamic expected pattern did not match value"), "Invalid exception message returned: "+ e.getMessage());
-    	}
-    }
+	@Test
+	public void failsWhenDynamicRegexDoesNotMatchStringAttributeInsideArray() throws JSONException {
+		try {
+			doTest(ARRAY_ELEMENT_PREFIX, null,
+					"{d:{results:[{__metadata:{uri:\"http://localhost:80/Person\\\\('\\\\w+'\\\\)\"}}]}}",
+					JSON_STRING_WITH_ARRAY);
+		} catch (AssertionError e) {
+			assertTrue(
+					e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Dynamic expected pattern did not match value"),
+					"Invalid exception message returned: " + e.getMessage());
+		}
+	}
 
-    @Test
-    public void failsWhenConstantRegexInvalid() throws JSONException {
-    	try {
-    		doTest(ARRAY_ELEMENT_PREFIX, "http://localhost:80/Person\\\\['\\\\d+'\\\\)", CONSTANT_URI_REGEX_EXPECTED_JSON, JSON_STRING_WITH_ARRAY);
-    	}
-    	catch (IllegalArgumentException e) {
-    		assertTrue(e.getMessage().startsWith("Constant expected pattern invalid: "), "Invalid exception message returned: "+ e.getMessage());
-    	}
-    }
+	@Test
+	public void failsWhenConstantRegexInvalid() throws JSONException {
+		try {
+			doTest(ARRAY_ELEMENT_PREFIX, "http://localhost:80/Person\\\\['\\\\d+'\\\\)",
+					CONSTANT_URI_REGEX_EXPECTED_JSON, JSON_STRING_WITH_ARRAY);
+		} catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().startsWith("Constant expected pattern invalid: "),
+					"Invalid exception message returned: " + e.getMessage());
+		}
+	}
 
-    @Test
-    public void failsWhenConstantRegexDoesNotMatchStringAttributeInsideArray() throws JSONException {
-    	try {
-    		doTest(ARRAY_ELEMENT_PREFIX, "http://localhost:80/Person\\\\('\\\\w+'\\\\)", CONSTANT_URI_REGEX_EXPECTED_JSON, JSON_STRING_WITH_ARRAY);
-    	}
-    	catch (AssertionError e) {
-    		assertTrue(e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Constant expected pattern did not match value"), "Invalid exception message returned: "+ e.getMessage());
-    	}
-    }
+	@Test
+	public void failsWhenConstantRegexDoesNotMatchStringAttributeInsideArray() throws JSONException {
+		try {
+			doTest(ARRAY_ELEMENT_PREFIX, "http://localhost:80/Person\\\\('\\\\w+'\\\\)",
+					CONSTANT_URI_REGEX_EXPECTED_JSON, JSON_STRING_WITH_ARRAY);
+		} catch (AssertionError e) {
+			assertTrue(
+					e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Constant expected pattern did not match value"),
+					"Invalid exception message returned: " + e.getMessage());
+		}
+	}
 }

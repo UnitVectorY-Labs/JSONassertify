@@ -51,18 +51,18 @@ public class RegularExpressionValueMatcher<T> implements ValueMatcher<T> {
 	 * the equals method.
 	 * 
 	 * @param pattern
-	 *            if non null, regular expression pattern which all actual
-	 *            values this matcher is applied to must match. If null, this
-	 *            matcher will apply pattern specified dynamically via the
-	 *            expected parameter to the equal method.
+	 *                if non null, regular expression pattern which all actual
+	 *                values this matcher is applied to must match. If null, this
+	 *                matcher will apply pattern specified dynamically via the
+	 *                expected parameter to the equal method.
 	 * @throws IllegalArgumentException
-	 *             if pattern is non-null and not a valid regular expression.
+	 *                                  if pattern is non-null and not a valid
+	 *                                  regular expression.
 	 */
 	public RegularExpressionValueMatcher(String pattern) throws IllegalArgumentException {
 		try {
 			expectedPattern = pattern == null ? null : Pattern.compile(pattern);
-		}
-		catch (PatternSyntaxException e) {
+		} catch (PatternSyntaxException e) {
 			throw new IllegalArgumentException("Constant expected pattern invalid: " + e.getMessage(), e);
 		}
 	}
@@ -72,14 +72,16 @@ public class RegularExpressionValueMatcher<T> implements ValueMatcher<T> {
 		String actualString = actual.toString();
 		String expectedString = expected.toString();
 		try {
-			Pattern pattern = isStaticPattern() ? expectedPattern : Pattern
-					.compile(expectedString);
+			Pattern pattern = isStaticPattern() ? expectedPattern
+					: Pattern
+							.compile(expectedString);
 			if (!pattern.matcher(actualString).matches()) {
-				throw new ValueMatcherException(getPatternType() + " expected pattern did not match value", pattern.toString(), actualString);
+				throw new ValueMatcherException(getPatternType() + " expected pattern did not match value",
+						pattern.toString(), actualString);
 			}
-		}
-		catch (PatternSyntaxException e) {
-			throw new ValueMatcherException(getPatternType() + " expected pattern invalid: " + e.getMessage(), e, expectedString, actualString);
+		} catch (PatternSyntaxException e) {
+			throw new ValueMatcherException(getPatternType() + " expected pattern invalid: " + e.getMessage(), e,
+					expectedString, actualString);
 		}
 		return true;
 	}
@@ -89,6 +91,6 @@ public class RegularExpressionValueMatcher<T> implements ValueMatcher<T> {
 	}
 
 	private String getPatternType() {
-		return isStaticPattern()? "Constant": "Dynamic";
+		return isStaticPattern() ? "Constant" : "Dynamic";
 	}
 }

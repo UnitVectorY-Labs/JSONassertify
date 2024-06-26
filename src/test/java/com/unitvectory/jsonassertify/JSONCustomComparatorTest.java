@@ -137,7 +137,8 @@ public class JSONCustomComparatorTest {
 
     @Test
     public void whenDeepPathMatchesCallCustomMatcher() throws JSONException {
-        JSONComparator jsonCmp = new CustomComparator(JSONCompareMode.STRICT, new Customization("outer.inner.value", comparator));
+        JSONComparator jsonCmp = new CustomComparator(JSONCompareMode.STRICT,
+                new Customization("outer.inner.value", comparator));
         JSONCompareResult result = compareJSON(deepExpected, deepActual, jsonCmp);
         assertTrue(result.passed(), result.getMessage());
         assertEquals(1, comparatorCallCount);
@@ -145,7 +146,8 @@ public class JSONCustomComparatorTest {
 
     @Test
     public void whenSimpleWildcardPathMatchesCallCustomMatcher() throws JSONException {
-        JSONComparator jsonCmp = new CustomComparator(JSONCompareMode.STRICT, new Customization("foo.*.baz", comparator));
+        JSONComparator jsonCmp = new CustomComparator(JSONCompareMode.STRICT,
+                new Customization("foo.*.baz", comparator));
         JSONCompareResult result = compareJSON(simpleWildcardExpected, simpleWildcardActual, jsonCmp);
         assertTrue(result.passed(), result.getMessage());
         assertEquals(2, comparatorCallCount);
@@ -153,7 +155,8 @@ public class JSONCustomComparatorTest {
 
     @Test
     public void whenDeepWildcardPathMatchesCallCustomMatcher() throws JSONException {
-        JSONComparator jsonCmp = new CustomComparator(JSONCompareMode.STRICT, new Customization("root.**.baz", comparator));
+        JSONComparator jsonCmp = new CustomComparator(JSONCompareMode.STRICT,
+                new Customization("root.**.baz", comparator));
         JSONCompareResult result = compareJSON(deepWildcardExpected, deepWildcardActual, jsonCmp);
         assertTrue(result.passed(), result.getMessage());
         assertEquals(3, comparatorCallCount);

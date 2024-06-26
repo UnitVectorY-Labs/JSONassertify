@@ -35,7 +35,8 @@ public class CustomComparatorTest {
         }
 
         @Override
-        public void compareJSONArray(String prefix, JSONArray expected, JSONArray actual, JSONCompareResult result) throws JSONException {
+        public void compareJSONArray(String prefix, JSONArray expected, JSONArray actual, JSONCompareResult result)
+                throws JSONException {
             compareJSONArrayOfJsonObjects(prefix, expected, actual, result);
         }
     }
@@ -44,8 +45,7 @@ public class CustomComparatorTest {
     public void testFullArrayComparison() throws Exception {
         JSONCompareResult compareResult = JSONCompare.compareJSON(
                 "[{id:1}, {id:3}, {id:5}]",
-                "[{id:1}, {id:3}, {id:6}, {id:7}]", new ArrayOfJsonObjectsComparator(JSONCompareMode.LENIENT)
-        );
+                "[{id:1}, {id:3}, {id:6}, {id:7}]", new ArrayOfJsonObjectsComparator(JSONCompareMode.LENIENT));
 
         assertTrue(compareResult.failed());
         String message = compareResult.getMessage().replaceAll("\n", "");

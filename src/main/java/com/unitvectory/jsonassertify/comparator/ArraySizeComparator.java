@@ -24,21 +24,32 @@ import com.unitvectory.jsonassertify.JSONCompareResult;
 /**
  * A JSONAssert array size comparator.
  * 
- * <p>Some typical usage idioms are listed below.</p>
+ * <p>
+ * Some typical usage idioms are listed below.
+ * </p>
  * 
- * <p>Assuming JSON to be verified is held in String variable ARRAY_OF_JSONOBJECTS and contains:</p>
+ * <p>
+ * Assuming JSON to be verified is held in String variable ARRAY_OF_JSONOBJECTS
+ * and contains:
+ * </p>
  * 
  * <code>{a:[7, 8, 9]}</code>
  * 
- * <p>then:</p>
+ * <p>
+ * then:
+ * </p>
  * 
- * <p>To verify that array 'a' contains 3 elements:</p>
+ * <p>
+ * To verify that array 'a' contains 3 elements:
+ * </p>
  * 
  * <code>
  * JSONAssert.assertEquals("{a:[3]}", ARRAY_OF_JSONOBJECTS, new ArraySizeComparator(JSONCompareMode.LENIENT));
  * </code>
  * 
- * <p>To verify that array 'a' contains between 2 and 6 elements:</p>
+ * <p>
+ * To verify that array 'a' contains between 2 and 6 elements:
+ * </p>
  * 
  * <code>
  * JSONAssert.assertEquals("{a:[2,6]}", ARRAY_OF_JSONOBJECTS, new ArraySizeComparator(JSONCompareMode.LENIENT));
@@ -53,9 +64,9 @@ public class ArraySizeComparator extends DefaultComparator {
 	 * Create new ArraySizeComparator.
 	 * 
 	 * @param mode
-	 *            comparison mode, has no impact on ArraySizeComparator but is
-	 *            used by instance of superclass DefaultComparator to control
-	 *            comparison of JSON items other than arrays.
+	 *             comparison mode, has no impact on ArraySizeComparator but is
+	 *             used by instance of superclass DefaultComparator to control
+	 *             comparison of JSON items other than arrays.
 	 */
 	public ArraySizeComparator(JSONCompareMode mode) {
 		super(mode);
@@ -80,7 +91,7 @@ public class ArraySizeComparator extends DefaultComparator {
 		if (!(expected.get(0) instanceof Number)) {
 			result.fail(MessageFormat
 					.format("{0}: invalid expectation: {1}expected array size ''{2}'' not a number",
-							arrayPrefix, (expected.length() == 1? "": "minimum "), expected.get(0)));
+							arrayPrefix, (expected.length() == 1 ? "" : "minimum "), expected.get(0)));
 			return;
 		}
 		if ((expected.length() == 2 && !(expected.get(1) instanceof Number))) {

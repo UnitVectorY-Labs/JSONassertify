@@ -39,11 +39,16 @@ public class JSONCompareUtilTest {
         final int NUM_E = 2;
 
         List<String> listToTest = new ArrayList<String>(NUM_A + NUM_B + NUM_C + NUM_D + NUM_E);
-        for (int i = 0; i < NUM_A; ++i) listToTest.add("A");
-        for (int i = 0; i < NUM_B; ++i) listToTest.add("B");
-        for (int i = 0; i < NUM_C; ++i) listToTest.add("C");
-        for (int i = 0; i < NUM_D; ++i) listToTest.add("D");
-        for (int i = 0; i < NUM_E; ++i) listToTest.add("E");
+        for (int i = 0; i < NUM_A; ++i)
+            listToTest.add("A");
+        for (int i = 0; i < NUM_B; ++i)
+            listToTest.add("B");
+        for (int i = 0; i < NUM_C; ++i)
+            listToTest.add("C");
+        for (int i = 0; i < NUM_D; ++i)
+            listToTest.add("D");
+        for (int i = 0; i < NUM_E; ++i)
+            listToTest.add("E");
         Collections.shuffle(listToTest);
 
         Map<String, Integer> cardinalityMap = JSONCompareUtil.getCardinalityMap(listToTest);

@@ -20,12 +20,13 @@ import java.util.regex.Pattern;
  * Associates a custom matcher to a specific jsonpath.
  */
 public final class Customization {
+	
 	private final Pattern path;
 	private final ValueMatcher<Object> comparator;
 
 	public Customization(String path, ValueMatcher<Object> comparator) {
-        assert path != null;
-        assert comparator != null;
+		assert path != null;
+		assert comparator != null;
 		this.path = Pattern.compile(buildPattern(path));
 		this.comparator = comparator;
 	}
@@ -88,9 +89,10 @@ public final class Customization {
 	}
 
 	/**
-	 * Creates a new {@link Customization} instance for {@code path} and {@code comparator}.
+	 * Creates a new {@link Customization} instance for {@code path} and
+	 * {@code comparator}.
 	 *
-	 * @param path the json path
+	 * @param path       the json path
 	 * @param comparator the comparator
 	 * @return a new Customization
 	 */
@@ -98,9 +100,9 @@ public final class Customization {
 		return new Customization(path, comparator);
 	}
 
-    public boolean appliesToPath(String path) {
-        return this.path.matcher(path).matches();
-    }
+	public boolean appliesToPath(String path) {
+		return this.path.matcher(path).matches();
+	}
 
 	/**
 	 * Return true if actual value matches expected value using this
@@ -109,15 +111,15 @@ public final class Customization {
 	 * JSONCompareResult result).
 	 *
 	 * @param actual
-	 *            JSON value being tested
+	 *                 JSON value being tested
 	 * @param expected
-	 *            expected JSON value
+	 *                 expected JSON value
 	 * @return true if actual value matches expected value
 	 */
-    @Deprecated
-    public boolean matches(Object actual, Object expected) {
-        return comparator.equal(actual, expected);
-    }
+	@Deprecated
+	public boolean matches(Object actual, Object expected) {
+		return comparator.equal(actual, expected);
+	}
 
 	/**
 	 * Return true if actual value matches expected value using this
@@ -125,26 +127,29 @@ public final class Customization {
 	 * on type of comparator.
 	 *
 	 * @param prefix
-	 *            JSON path of the JSON item being tested (only used if
-	 *            comparator is a LocationAwareValueMatcher)
+	 *                 JSON path of the JSON item being tested (only used if
+	 *                 comparator is a LocationAwareValueMatcher)
 	 * @param actual
-	 *            JSON value being tested
+	 *                 JSON value being tested
 	 * @param expected
-	 *            expected JSON value
+	 *                 expected JSON value
 	 * @param result
-	 *            JSONCompareResult to which match failure may be passed (only
-	 *            used if comparator is a LocationAwareValueMatcher)
+	 *                 JSONCompareResult to which match failure may be passed (only
+	 *                 used if comparator is a LocationAwareValueMatcher)
 	 * @return true if expected and actual equal or any difference has already
 	 *         been passed to specified result instance, false otherwise.
 	 * @throws ValueMatcherException
-	 *             if expected and actual values not equal and ValueMatcher
-	 *             needs to override default comparison failure message that
-	 *             would be generated if this method returned false.
+	 *                               if expected and actual values not equal and
+	 *                               ValueMatcher
+	 *                               needs to override default comparison failure
+	 *                               message that
+	 *                               would be generated if this method returned
+	 *                               false.
 	 */
 	public boolean matches(String prefix, Object actual, Object expected,
 			JSONCompareResult result) throws ValueMatcherException {
 		if (comparator instanceof LocationAwareValueMatcher) {
-			return ((LocationAwareValueMatcher<Object>)comparator).equal(prefix, actual, expected, result);
+			return ((LocationAwareValueMatcher<Object>) comparator).equal(prefix, actual, expected, result);
 		}
 		return comparator.equal(actual, expected);
 	}

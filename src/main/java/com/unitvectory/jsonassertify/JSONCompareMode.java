@@ -15,52 +15,88 @@
 package com.unitvectory.jsonassertify;
 
 /**
- * <p>These different modes define different behavior for the comparison of JSON for testing.
- * Each mode encapsulates two underlying behaviors: extensibility and strict ordering.</p>
+ * <p>
+ * These different modes define different behavior for the comparison of JSON
+ * for testing.
+ * Each mode encapsulates two underlying behaviors: extensibility and strict
+ * ordering.
+ * </p>
  * <!-- HTML table incompatible with stricter Java 8 javadoc
  * <table border="1" summary="Behavior of JSONCompareMode">
- *     <tr><th>&nbsp;</th><th>Extensible</th><th>Strict Ordering</th></tr>
- *     <tr><th>STRICT</th><th>no</th><th>yes</th></tr>
- *     <tr><th>LENIENT</th><th>yes</th><th>no</th></tr>
- *     <tr><th>NON_EXTENSIBLE</th><th>no</th><th>no</th></tr>
- *     <tr><th>STRICT_ORDER</th><th>yes</th><th>yes</th></tr>
+ * <tr>
+ * <th>&nbsp;</th>
+ * <th>Extensible</th>
+ * <th>Strict Ordering</th>
+ * </tr>
+ * <tr>
+ * <th>STRICT</th>
+ * <th>no</th>
+ * <th>yes</th>
+ * </tr>
+ * <tr>
+ * <th>LENIENT</th>
+ * <th>yes</th>
+ * <th>no</th>
+ * </tr>
+ * <tr>
+ * <th>NON_EXTENSIBLE</th>
+ * <th>no</th>
+ * <th>no</th>
+ * </tr>
+ * <tr>
+ * <th>STRICT_ORDER</th>
+ * <th>yes</th>
+ * <th>yes</th>
+ * </tr>
  * </table>
  * -->
  *
- * <p>If extensibility not allowed, then all of the expected values must match in what's being tested,
- * but any additional fields will cause the test to fail.  When extensibility is allowed, all values
- * must still match.  For example, if you're expecting:</p>
+ * <p>
+ * If extensibility not allowed, then all of the expected values must match in
+ * what's being tested,
+ * but any additional fields will cause the test to fail. When extensibility is
+ * allowed, all values
+ * must still match. For example, if you're expecting:
+ * </p>
  *
  * <code>{id:1,name:"Carter"}</code>
  *
- * <p>Then the following will pass when <i>extensible</i>, and will fail when not:</p>
+ * <p>
+ * Then the following will pass when <i>extensible</i>, and will fail when not:
+ * </p>
  *
  * <code>{id:1,name:"Carter",favoriteColor:"blue"}</code>
  *
- * <p>If <i>strict ordering</i> is enabled, JSON arrays must be in strict sequence.  For example, if you're expecting:</p>
+ * <p>
+ * If <i>strict ordering</i> is enabled, JSON arrays must be in strict sequence.
+ * For example, if you're expecting:
+ * </p>
  *
  * <code>{id:1,friends:[{id:<b>2</b>},{id:<b>3</b>}]}</code>
  *
- * <p>Then the following will fail strict ordering, but will otherwise pass:</p>
+ * <p>
+ * Then the following will fail strict ordering, but will otherwise pass:
+ * </p>
  *
  * <code>{id:1,friends:[{id:<b>3</b>},{id:<b>2</b>}]}</code>
  *
  */
 public enum JSONCompareMode {
+    
     /**
-     * Strict checking.  Not extensible, and strict array ordering.
+     * Strict checking. Not extensible, and strict array ordering.
      */
     STRICT(false, true),
     /**
-     * Lenient checking.  Extensible, and non-strict array ordering.
+     * Lenient checking. Extensible, and non-strict array ordering.
      */
     LENIENT(true, false),
     /**
-     * Non-extensible checking.  Not extensible, and non-strict array ordering.
+     * Non-extensible checking. Not extensible, and non-strict array ordering.
      */
     NON_EXTENSIBLE(false, false),
     /**
-     * Strict order checking.  Extensible, and strict array ordering.
+     * Strict order checking. Extensible, and strict array ordering.
      */
     STRICT_ORDER(true, true);
 
@@ -74,7 +110,9 @@ public enum JSONCompareMode {
 
     /**
      * Is extensible
-     * @return True if results can be extended from what's expected, otherwise false.
+     * 
+     * @return True if results can be extended from what's expected, otherwise
+     *         false.
      */
     public boolean isExtensible() {
         return _extensible;
@@ -82,12 +120,13 @@ public enum JSONCompareMode {
 
     /**
      * Strict order required
+     * 
      * @return True if results require strict array ordering, otherwise false.
      */
     public boolean hasStrictOrder() {
         return _strictOrder;
     }
-    
+
     /**
      * Get the equivalent {@code JSONCompareMode} with or without strict ordering.
      * 
@@ -105,7 +144,8 @@ public enum JSONCompareMode {
     /**
      * Get the equivalent {@code JSONCompareMode} with or without extensibility.
      * 
-     * @param extensible if true, allows keys in actual that don't appear in expected
+     * @param extensible if true, allows keys in actual that don't appear in
+     *                   expected
      * @return the equivalent {@code JSONCompareMode}
      */
     public JSONCompareMode withExtensible(boolean extensible) {

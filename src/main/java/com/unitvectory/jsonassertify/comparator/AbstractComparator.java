@@ -30,7 +30,8 @@ import static com.unitvectory.jsonassertify.comparator.JSONCompareUtil.*;
 public abstract class AbstractComparator implements JSONComparator {
 
     /**
-     * Compares JSONObject provided to the expected JSONObject, and returns the results of the comparison.
+     * Compares JSONObject provided to the expected JSONObject, and returns the
+     * results of the comparison.
      *
      * @param expected Expected JSONObject
      * @param actual   JSONObject to compare
@@ -44,7 +45,8 @@ public abstract class AbstractComparator implements JSONComparator {
     }
 
     /**
-     * Compares JSONArray provided to the expected JSONArray, and returns the results of the comparison.
+     * Compares JSONArray provided to the expected JSONArray, and returns the
+     * results of the comparison.
      *
      * @param expected Expected JSONArray
      * @param actual   JSONArray to compare
@@ -57,7 +59,8 @@ public abstract class AbstractComparator implements JSONComparator {
         return result;
     }
 
-    protected void checkJsonObjectKeysActualInExpected(String prefix, JSONObject expected, JSONObject actual, JSONCompareResult result) {
+    protected void checkJsonObjectKeysActualInExpected(String prefix, JSONObject expected, JSONObject actual,
+            JSONCompareResult result) {
         Set<String> actualKeys = getKeys(actual);
         for (String key : actualKeys) {
             if (!expected.has(key)) {
@@ -66,7 +69,8 @@ public abstract class AbstractComparator implements JSONComparator {
         }
     }
 
-    protected void checkJsonObjectKeysExpectedInActual(String prefix, JSONObject expected, JSONObject actual, JSONCompareResult result) throws JSONException {
+    protected void checkJsonObjectKeysExpectedInActual(String prefix, JSONObject expected, JSONObject actual,
+            JSONCompareResult result) throws JSONException {
         Set<String> expectedKeys = getKeys(expected);
         for (String key : expectedKeys) {
             Object expectedValue = expected.get(key);
@@ -79,7 +83,8 @@ public abstract class AbstractComparator implements JSONComparator {
         }
     }
 
-    protected void compareJSONArrayOfJsonObjects(String key, JSONArray expected, JSONArray actual, JSONCompareResult result) throws JSONException {
+    protected void compareJSONArrayOfJsonObjects(String key, JSONArray expected, JSONArray actual,
+            JSONCompareResult result) throws JSONException {
         String uniqueKey = findUniqueKey(expected);
         if (uniqueKey == null || !isUsableAsUniqueKey(uniqueKey, actual)) {
             // An expensive last resort
@@ -104,7 +109,8 @@ public abstract class AbstractComparator implements JSONComparator {
         }
     }
 
-    protected void compareJSONArrayOfSimpleValues(String key, JSONArray expected, JSONArray actual, JSONCompareResult result) throws JSONException {
+    protected void compareJSONArrayOfSimpleValues(String key, JSONArray expected, JSONArray actual,
+            JSONCompareResult result) throws JSONException {
         Map<Object, Integer> expectedCount = JSONCompareUtil.getCardinalityMap(jsonArrayToList(expected));
         Map<Object, Integer> actualCount = JSONCompareUtil.getCardinalityMap(jsonArrayToList(actual));
         for (Object o : expectedCount.keySet()) {
@@ -122,7 +128,8 @@ public abstract class AbstractComparator implements JSONComparator {
         }
     }
 
-    protected void compareJSONArrayWithStrictOrder(String key, JSONArray expected, JSONArray actual, JSONCompareResult result) throws JSONException {
+    protected void compareJSONArrayWithStrictOrder(String key, JSONArray expected, JSONArray actual,
+            JSONCompareResult result) throws JSONException {
         for (int i = 0; i < expected.length(); ++i) {
             Object expectedValue = JSONCompareUtil.getObjectOrNull(expected, i);
             Object actualValue = JSONCompareUtil.getObjectOrNull(actual, i);
@@ -130,12 +137,14 @@ public abstract class AbstractComparator implements JSONComparator {
         }
     }
 
-    // This is expensive (O(n^2) -- yuck), but may be the only resort for some cases with loose array ordering, and no
+    // This is expensive (O(n^2) -- yuck), but may be the only resort for some cases
+    // with loose array ordering, and no
     // easy way to uniquely identify each element.
-    // This is expensive (O(n^2) -- yuck), but may be the only resort for some cases with loose array ordering, and no
+    // This is expensive (O(n^2) -- yuck), but may be the only resort for some cases
+    // with loose array ordering, and no
     // easy way to uniquely identify each element.
     protected void recursivelyCompareJSONArray(String key, JSONArray expected, JSONArray actual,
-                                               JSONCompareResult result) throws JSONException {
+            JSONCompareResult result) throws JSONException {
         Set<Integer> matched = new HashSet<Integer>();
         for (int i = 0; i < expected.length(); ++i) {
             Object expectedElement = JSONCompareUtil.getObjectOrNull(expected, i);
@@ -146,7 +155,8 @@ public abstract class AbstractComparator implements JSONComparator {
                     matchFound = true;
                     break;
                 }
-                if ((expectedElement == null && actualElement != null) || (expectedElement != null && actualElement == null)) {
+                if ((expectedElement == null && actualElement != null)
+                        || (expectedElement != null && actualElement == null)) {
                     continue;
                 }
                 if (matched.contains(j) || !actualElement.getClass().equals(expectedElement.getClass())) {
