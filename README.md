@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![codecov](https://codecov.io/gh/UnitVectorY-Labs/JSONassertify/graph/badge.svg?token=AkErQGHlR1)](https://codecov.io/gh/UnitVectorY-Labs/JSONassertify)
+
 JSONassertify
 =============
 
