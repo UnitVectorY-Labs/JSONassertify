@@ -19,6 +19,9 @@ package com.unitvectory.jsonassertify;
  * 
  * @param <T> the object type to compare
  * @author Duncan Mackinder
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  *
  */
 public interface LocationAwareValueMatcher<T> extends ValueMatcher<T> {

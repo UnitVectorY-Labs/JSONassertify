@@ -26,6 +26,9 @@ import java.util.regex.PatternSyntaxException;
  * 
  * @param <T> the type of the value to match
  * @author Duncan Mackinder
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  * 
  */
 public class RegularExpressionValueMatcher<T> implements ValueMatcher<T> {

@@ -29,6 +29,10 @@ import org.json.JSONObject;
 
 /**
  * Utility class that contains Json manipulation methods.
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public final class JSONCompareUtil {
     private static Integer INTEGER_ONE = Integer.valueOf(1);

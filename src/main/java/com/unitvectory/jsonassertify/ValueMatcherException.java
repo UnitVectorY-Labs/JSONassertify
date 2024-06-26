@@ -18,6 +18,9 @@ package com.unitvectory.jsonassertify;
  * detail on why matches method failed.
  * 
  * @author Duncan Mackinder
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class ValueMatcherException extends RuntimeException {
 

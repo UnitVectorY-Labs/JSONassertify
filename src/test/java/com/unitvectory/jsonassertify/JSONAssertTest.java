@@ -33,6 +33,10 @@ import com.unitvectory.jsonassertify.comparator.JSONComparator;
 
 /**
  * Unit tests for {@link JSONAssert}
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class JSONAssertTest {
     @Test

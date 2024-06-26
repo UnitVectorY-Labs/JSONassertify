@@ -27,6 +27,9 @@ import com.unitvectory.jsonassertify.JSONCompareMode;
  * Unit tests for ArraySizeComparator
  * 
  * @author Duncan Mackinder
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class ArraySizeComparatorTest {
 	private static final String twoElementArray = "{a:[b,c]}";

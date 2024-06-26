@@ -79,6 +79,9 @@ package com.unitvectory.jsonassertify;
  *
  * <code>{id:1,friends:[{id:<b>3</b>},{id:<b>2</b>}]}</code>
  *
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public enum JSONCompareMode {
     

@@ -26,6 +26,10 @@ import static com.unitvectory.jsonassertify.comparator.JSONCompareUtil.allSimple
  * This class is the default json comparator implementation.
  * Comparison is performed according to {@link JSONCompareMode} that is passed
  * as constructor's argument.
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class DefaultComparator extends AbstractComparator {
 

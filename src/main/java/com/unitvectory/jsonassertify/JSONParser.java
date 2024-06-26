@@ -20,6 +20,10 @@ import org.json.JSONString;
 
 /**
  * Simple JSON parsing utility.
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class JSONParser {
   

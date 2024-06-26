@@ -22,13 +22,16 @@ import com.unitvectory.jsonassertify.comparator.JSONComparator;
 
 /**
  * Provides API to compare two JSON entities. This is the backend to
- * {@link JSONAssert}, but it can
- * be programmed against directly to access the functionality. (eg, to make
- * something that works with a
- * non-JUnit test framework)
+ * {@link JSONAssert}, but it can be programmed against directly to access the
+ * functionality. (eg, to make something that works with a non-JUnit test
+ * framework)
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public final class JSONCompare {
-    
+
     private JSONCompare() {
     }
 

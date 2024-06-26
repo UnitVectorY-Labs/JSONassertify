@@ -17,6 +17,10 @@ package com.unitvectory.jsonassertify;
  * Represents a value matcher that can compare two objects for equality.
  *
  * @param <T> the object type to compare
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public interface ValueMatcher<T> {
 

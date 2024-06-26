@@ -33,6 +33,9 @@ import com.unitvectory.jsonassertify.comparator.JSONComparator;
  * Unit tests for ArrayValueMatcher
  * 
  * @author Duncan Mackinder
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class ArrayValueMatcherTest {
 

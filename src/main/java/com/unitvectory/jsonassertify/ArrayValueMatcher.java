@@ -185,6 +185,9 @@ import com.unitvectory.jsonassertify.comparator.JSONComparator;
  * 
  * @param <T> type of JSON value to be compared
  * @author Duncan Mackinder
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  * 
  */
 public class ArrayValueMatcher<T> implements LocationAwareValueMatcher<T> {

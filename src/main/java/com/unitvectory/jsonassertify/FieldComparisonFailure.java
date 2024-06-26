@@ -15,6 +15,10 @@ package com.unitvectory.jsonassertify;
 
 /**
  * Models a failure when comparing two fields.
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class FieldComparisonFailure {
 

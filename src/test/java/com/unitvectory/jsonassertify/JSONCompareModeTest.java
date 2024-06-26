@@ -25,6 +25,10 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link JSONCompareMode}
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class JSONCompareModeTest {
     @Test

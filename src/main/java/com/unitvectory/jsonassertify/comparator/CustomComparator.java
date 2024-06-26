@@ -24,6 +24,10 @@ import java.util.Collection;
 
 /**
  * A JSONAssert custom comparator.
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class CustomComparator extends DefaultComparator {
 

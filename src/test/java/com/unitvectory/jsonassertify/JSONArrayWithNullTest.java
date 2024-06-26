@@ -20,6 +20,10 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@code JSONArray}.
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class JSONArrayWithNullTest {
 

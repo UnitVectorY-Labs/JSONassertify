@@ -26,7 +26,9 @@ import java.util.Map;
 /**
  * Test JSONCompareUtil
  *
- * @author Carter Page <carter@skyscreamer.org>
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class JSONCompareUtilTest {
     @Test

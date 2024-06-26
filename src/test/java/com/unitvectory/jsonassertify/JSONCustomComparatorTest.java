@@ -24,6 +24,10 @@ import static com.unitvectory.jsonassertify.JSONCompare.compareJSON;
 
 /**
  * Unit tests for {@code JSONCustomComparator}.
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class JSONCustomComparatorTest {
 

@@ -71,6 +71,9 @@ import com.unitvectory.jsonassertify.comparator.JSONComparator;
  * cases will be fixed in future versions.
  * </p>
  *
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class JSONAssert {
     

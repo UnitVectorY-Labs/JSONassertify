@@ -25,6 +25,10 @@ import static com.unitvectory.jsonassertify.comparator.JSONCompareUtil.*;
 /**
  * This class provides a skeletal implementation of the {@link JSONComparator}
  * interface, to minimize the effort required to implement this interface.
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public abstract class AbstractComparator implements JSONComparator {
 

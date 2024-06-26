@@ -23,6 +23,9 @@ import com.unitvectory.jsonassertify.comparator.CustomComparator;
  * Unit tests for RegularExpressionValueMatcher
  * 
  * @author Duncan Mackinder
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class RegularExpressionValueMatcherTest {
 	private static final String ARRAY_ELEMENT_PREFIX = "d.results[0].__metadata.uri";

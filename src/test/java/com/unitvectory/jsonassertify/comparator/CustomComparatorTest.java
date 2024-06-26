@@ -23,8 +23,10 @@ import com.unitvectory.jsonassertify.JSONCompareMode;
 import com.unitvectory.jsonassertify.JSONCompareResult;
 
 /**
- * @author <a href="mailto:aiveeen@gmail.com">Ivan Zaytsev</a>
- *         2013-01-04
+ * @author Ivan Zaytsev
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class CustomComparatorTest {
 

@@ -55,6 +55,9 @@ import com.unitvectory.jsonassertify.JSONCompareResult;
  * </code>
  * 
  * @author Duncan Mackinder
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  * 
  */
 public class ArraySizeComparator extends DefaultComparator {

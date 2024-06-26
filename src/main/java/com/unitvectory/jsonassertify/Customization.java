@@ -17,6 +17,10 @@ import java.util.regex.Pattern;
 
 /**
  * Associates a custom matcher to a specific jsonpath.
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public final class Customization {
 

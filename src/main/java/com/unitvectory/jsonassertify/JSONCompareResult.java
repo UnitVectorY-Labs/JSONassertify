@@ -22,6 +22,10 @@ import org.json.JSONObject;
 
 /**
  * Bean for holding results from JSONCompare.
+ * 
+ * @author Carter Page
+ * @author Corby Page
+ * @author Solomon Duskis
  */
 public class JSONCompareResult {
 
