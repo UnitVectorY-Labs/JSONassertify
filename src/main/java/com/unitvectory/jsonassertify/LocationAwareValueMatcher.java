@@ -21,6 +21,7 @@ package com.unitvectory.jsonassertify;
  * A ValueMatcher extension that provides location in form of prefix to the
  * equals method.
  * 
+ * @param <T> the object type to compare
  * @author Duncan Mackinder
  *
  */

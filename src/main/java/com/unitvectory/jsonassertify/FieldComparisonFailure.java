@@ -18,25 +18,47 @@ package com.unitvectory.jsonassertify;
  * Models a failure when comparing two fields.
  */
 public class FieldComparisonFailure {
-    
+
     private final String _field;
     private final Object _expected;
     private final Object _actual;
 
+    /**
+     * Constructs a new FieldComparisonFailure.
+     * 
+     * @param field    the field that failed
+     * @param expected the expected value
+     * @param actual   the actual value
+     */
     public FieldComparisonFailure(String field, Object expected, Object actual) {
         this._field = field;
         this._expected = expected;
         this._actual = actual;
     }
 
+    /**
+     * Gets the field that failed.
+     * 
+     * @return the field
+     */
     public String getField() {
         return _field;
     }
 
+    /**
+     * Gets the expected value.
+     * 
+     * @return the expected value
+     */
     public Object getExpected() {
         return _expected;
     }
 
+    /**
+     * Gets the actual value.
+     * 
+     * @return the actual value
+     */
     public Object getActual() {
         return _actual;
     }

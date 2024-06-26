@@ -223,10 +223,25 @@ public final class JSONCompareUtil {
         return keys;
     }
 
+    /**
+     * Qualifies the given key with the given prefix.
+     * 
+     * @param prefix the prefix to use
+     * @param key    the key to qualify
+     * @return the qualified key
+     */
     public static String qualify(String prefix, String key) {
         return "".equals(prefix) ? key : prefix + "." + key;
     }
 
+    /**
+     * Formats a unique key for the given key, unique key, and value.
+     * 
+     * @param key       the key to use
+     * @param uniqueKey the unique key to use
+     * @param value     the value to use
+     * @return the formatted unique key
+     */
     public static String formatUniqueKey(String key, String uniqueKey, Object value) {
         return key + "[" + uniqueKey + "=" + value + "]";
     }

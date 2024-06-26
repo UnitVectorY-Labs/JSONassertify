@@ -22,11 +22,17 @@ package com.unitvectory.jsonassertify;
  *
  */
 public class ValueMatcherException extends RuntimeException {
-	
+
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Expected value
+	 */
 	private final String expected;
 
+	/**
+	 * Actual value
+	 */
 	private final String actual;
 
 	/**
@@ -64,6 +70,8 @@ public class ValueMatcherException extends RuntimeException {
 	}
 
 	/**
+	 * Gets the expected value
+	 * 
 	 * @return the expected value
 	 */
 	public String getExpected() {
@@ -71,6 +79,8 @@ public class ValueMatcherException extends RuntimeException {
 	}
 
 	/**
+	 * Gets the actual value
+	 * 
 	 * @return the actual value
 	 */
 	public String getActual() {

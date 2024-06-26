@@ -23,10 +23,18 @@ import com.unitvectory.jsonassertify.ValueMatcherException;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * A JSONAssert custom comparator.
+ */
 public class CustomComparator extends DefaultComparator {
 
     private final Collection<Customization> customizations;
 
+    /**
+     * Constructs a new CustomComparator with the provided {@link JSONCompareMode} and {@link Customization}s.
+     * @param mode the comparison mode
+     * @param customizations the customizations to apply
+     */
     public CustomComparator(JSONCompareMode mode, Customization... customizations) {
         super(mode);
         this.customizations = Arrays.asList(customizations);

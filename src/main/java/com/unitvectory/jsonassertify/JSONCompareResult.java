@@ -25,7 +25,7 @@ import org.json.JSONObject;
  * Bean for holding results from JSONCompare.
  */
 public class JSONCompareResult {
-    
+
     private boolean _success;
     private StringBuilder _message;
     private String _field;
@@ -36,7 +36,7 @@ public class JSONCompareResult {
     private final List<FieldComparisonFailure> _fieldUnexpected = new ArrayList<FieldComparisonFailure>();
 
     /**
-     * Default constructor.
+     * Constructs a new JSONCompareResult.
      */
     public JSONCompareResult() {
         this(true, null);
@@ -166,6 +166,11 @@ public class JSONCompareResult {
         return _field;
     }
 
+    /**
+     * Identify that the comparison failed
+     * 
+     * @param message message to add to the result
+     */
     public void fail(String message) {
         _success = false;
         if (_message.length() == 0) {

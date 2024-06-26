@@ -25,6 +25,7 @@ import java.util.regex.PatternSyntaxException;
  * then expected value passed to equals method will be used to dynamically
  * specify regular expression pattern that actual value must match.
  * 
+ * @param <T> the type of the value to match
  * @author Duncan Mackinder
  * 
  */

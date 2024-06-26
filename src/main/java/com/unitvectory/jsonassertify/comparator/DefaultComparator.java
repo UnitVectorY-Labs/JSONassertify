@@ -32,6 +32,11 @@ public class DefaultComparator extends AbstractComparator {
 
     JSONCompareMode mode;
 
+    /**
+     * Constructs a new DefaultComparator with the provided {@link JSONCompareMode}.
+     * 
+     * @param mode the comparison mode
+     */
     public DefaultComparator(JSONCompareMode mode) {
         this.mode = mode;
     }
@@ -96,10 +101,25 @@ public class DefaultComparator extends AbstractComparator {
         }
     }
 
+    /**
+     * Checks if the provided objects are of type Number.
+     * 
+     * @param expectedValue the expected value
+     * @param actualValue   the actual value
+     * @return true if both objects are of type Number; false otherwise
+     */
     protected boolean areNumbers(Object expectedValue, Object actualValue) {
         return expectedValue instanceof Number && actualValue instanceof Number;
     }
 
+    /**
+     * Checks if the provided objects are of type Number and are not equal.
+     * 
+     * @param expectedValue the expected value
+     * @param actualValue   the actual value
+     * @return true if both objects are of type Number and are not equal; false
+     *         otherwise
+     */
     protected boolean areNotSameDoubles(Object expectedValue, Object actualValue) {
         return ((Number) expectedValue).doubleValue() != ((Number) actualValue).doubleValue();
     }

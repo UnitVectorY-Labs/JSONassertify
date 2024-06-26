@@ -20,10 +20,16 @@ import java.util.regex.Pattern;
  * Associates a custom matcher to a specific jsonpath.
  */
 public final class Customization {
-	
+
 	private final Pattern path;
 	private final ValueMatcher<Object> comparator;
 
+	/**
+	 * Constructs a new Customization with the provided path and comparator.
+	 * 
+	 * @param path       the json path
+	 * @param comparator the comparator
+	 */
 	public Customization(String path, ValueMatcher<Object> comparator) {
 		assert path != null;
 		assert comparator != null;
@@ -100,6 +106,13 @@ public final class Customization {
 		return new Customization(path, comparator);
 	}
 
+	/**
+	 * Returns true if this Customization applies to the specified path.
+	 * 
+	 * @param path the path to test
+	 * @return true if this Customization applies to the specified path; otherwise
+	 *         false
+	 */
 	public boolean appliesToPath(String path) {
 		return this.path.matcher(path).matches();
 	}

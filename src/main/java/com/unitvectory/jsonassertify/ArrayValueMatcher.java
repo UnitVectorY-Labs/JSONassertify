@@ -184,11 +184,12 @@ import com.unitvectory.jsonassertify.comparator.JSONComparator;
  * <code>"{a:9}"</code>
  * </p>
  * 
+ * @param <T> type of JSON value to be compared
  * @author Duncan Mackinder
  * 
  */
 public class ArrayValueMatcher<T> implements LocationAwareValueMatcher<T> {
-	
+
 	private final JSONComparator comparator;
 	private final int from;
 	private final int to;
