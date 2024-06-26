@@ -13,7 +13,6 @@
 */
 
 package com.unitvectory.jsonassertify;
-
 /**
  * <p>
  * These different modes define different behavior for the comparison of JSON

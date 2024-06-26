@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-
 package com.unitvectory.jsonassertify;
 
 import org.json.JSONException;
@@ -23,6 +22,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.unitvectory.jsonassertify.JSONCompare.compareJSON;
 
+/**
+ * Unit tests for {@code JSONCustomComparator}.
+ */
 public class JSONCustomComparatorTest {
 
     String actual = "{\"first\":\"actual\", \"second\":1}";

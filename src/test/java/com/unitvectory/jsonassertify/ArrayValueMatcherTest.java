@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-
 package com.unitvectory.jsonassertify;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,7 +33,6 @@ import com.unitvectory.jsonassertify.comparator.JSONComparator;
  * Unit tests for ArrayValueMatcher
  * 
  * @author Duncan Mackinder
- *
  */
 public class ArrayValueMatcherTest {
 

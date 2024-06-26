@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-
 package com.unitvectory.jsonassertify;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,7 +23,6 @@ import com.unitvectory.jsonassertify.comparator.CustomComparator;
  * Unit tests for RegularExpressionValueMatcher
  * 
  * @author Duncan Mackinder
- * 
  */
 public class RegularExpressionValueMatcherTest {
 	private static final String ARRAY_ELEMENT_PREFIX = "d.results[0].__metadata.uri";

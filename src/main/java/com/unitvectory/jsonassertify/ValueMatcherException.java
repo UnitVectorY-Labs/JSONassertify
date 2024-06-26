@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-
 package com.unitvectory.jsonassertify;
 
 /**
@@ -19,7 +18,6 @@ package com.unitvectory.jsonassertify;
  * detail on why matches method failed.
  * 
  * @author Duncan Mackinder
- *
  */
 public class ValueMatcherException extends RuntimeException {
 

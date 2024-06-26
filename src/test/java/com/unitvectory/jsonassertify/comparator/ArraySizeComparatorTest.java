@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-
 package com.unitvectory.jsonassertify.comparator;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -28,7 +27,6 @@ import com.unitvectory.jsonassertify.JSONCompareMode;
  * Unit tests for ArraySizeComparator
  * 
  * @author Duncan Mackinder
- *
  */
 public class ArraySizeComparatorTest {
 	private static final String twoElementArray = "{a:[b,c]}";
