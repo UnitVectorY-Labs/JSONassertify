@@ -32,6 +32,9 @@ import com.unitvectory.jsonassertify.comparator.JSONComparator;
  */
 public final class JSONCompare {
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private JSONCompare() {
     }
 

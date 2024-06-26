@@ -34,6 +34,9 @@ public class JSONParser {
   // ... [or] NaN or Infinity".
   private static final String NUMBER_REGEX = "-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?";
 
+  /**
+   * Private constructor to prevent instantiation.
+   */
   private JSONParser() {
   }
 

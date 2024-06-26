@@ -13,6 +13,7 @@
 */
 
 package com.unitvectory.jsonassertify;
+
 /**
  * <p>
  * These different modes define different behavior for the comparison of JSON
@@ -84,27 +85,37 @@ package com.unitvectory.jsonassertify;
  * @author Solomon Duskis
  */
 public enum JSONCompareMode {
-    
+
     /**
      * Strict checking. Not extensible, and strict array ordering.
      */
     STRICT(false, true),
+
     /**
      * Lenient checking. Extensible, and non-strict array ordering.
      */
     LENIENT(true, false),
+
     /**
      * Non-extensible checking. Not extensible, and non-strict array ordering.
      */
     NON_EXTENSIBLE(false, false),
+
     /**
      * Strict order checking. Extensible, and strict array ordering.
      */
     STRICT_ORDER(true, true);
 
     private final boolean _extensible;
+
     private final boolean _strictOrder;
 
+    /**
+     * Create a new JSONCompareMode
+     * 
+     * @param extensible  the extensibility of the comparison
+     * @param strictOrder the strict ordering of the comparison
+     */
     JSONCompareMode(boolean extensible, boolean strictOrder) {
         _extensible = extensible;
         _strictOrder = strictOrder;
@@ -113,7 +124,7 @@ public enum JSONCompareMode {
     /**
      * Is extensible
      * 
-     * @return True if results can be extended from what's expected, otherwise
+     * @return True if results can be extended from what's expected; otherwise
      *         false.
      */
     public boolean isExtensible() {
@@ -123,7 +134,7 @@ public enum JSONCompareMode {
     /**
      * Strict order required
      * 
-     * @return True if results require strict array ordering, otherwise false.
+     * @return True if results require strict array ordering; otherwise false.
      */
     public boolean hasStrictOrder() {
         return _strictOrder;

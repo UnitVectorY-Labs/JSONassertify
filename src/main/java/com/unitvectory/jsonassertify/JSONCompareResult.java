@@ -21,7 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * Bean for holding results from JSONCompare.
+ * Result of a {@see JSONCompare}.
+ * 
  * 
  * @author Carter Page
  * @author Corby Page
@@ -45,6 +46,11 @@ public class JSONCompareResult {
         this(true, null);
     }
 
+    /**
+     * Constructs a new JSONCompareResult.
+     * @param success true if the comparison passed
+     * @param message message to add to the result
+     */
     private JSONCompareResult(boolean success, String message) {
         _success = success;
         _message = new StringBuilder(message == null ? "" : message);

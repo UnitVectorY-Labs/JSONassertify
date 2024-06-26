@@ -242,11 +242,9 @@ public class ArrayValueMatcher<T> implements LocationAwareValueMatcher<T> {
 	}
 
 	@Override
-	/*
-	 * NOTE: method defined as required by ValueMatcher interface but will never
-	 * be called so defined simply to indicate match failure
-	 */
 	public boolean equal(T o1, T o2) {
+		// NOTE: method defined as required by ValueMatcher interface but will never be
+		// called so defined simply to indicate match failure
 		return false;
 	}
 

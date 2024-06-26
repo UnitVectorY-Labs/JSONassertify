@@ -13,26 +13,28 @@
 */
 package com.unitvectory.jsonassertify;
 
+import java.io.Serializable;
+
 /**
- * Exception that may be thrown by ValueMatcher subclasses to provide more
- * detail on why matches method failed.
+ * Exception that may be thrown by {@link ValueMatcher} subclasses to provide
+ * more detail on why matches method failed.
  * 
  * @author Duncan Mackinder
  * @author Carter Page
  * @author Corby Page
  * @author Solomon Duskis
  */
-public class ValueMatcherException extends RuntimeException {
+public class ValueMatcherException extends RuntimeException implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Expected value
+	 * The expected value
 	 */
 	private final String expected;
 
 	/**
-	 * Actual value
+	 * The actual value
 	 */
 	private final String actual;
 

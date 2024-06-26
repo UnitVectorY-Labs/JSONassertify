@@ -76,7 +76,10 @@ import com.unitvectory.jsonassertify.comparator.JSONComparator;
  * @author Solomon Duskis
  */
 public class JSONAssert {
-    
+
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private JSONAssert() {
     }
 
