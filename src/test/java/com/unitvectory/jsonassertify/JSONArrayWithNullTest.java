@@ -3,7 +3,7 @@ package com.unitvectory.jsonassertify;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class JSONArrayWithNullTest {
     @Test

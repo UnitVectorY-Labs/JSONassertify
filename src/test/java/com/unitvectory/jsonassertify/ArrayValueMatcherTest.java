@@ -14,16 +14,17 @@
 
 package com.unitvectory.jsonassertify;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.text.MessageFormat;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import com.unitvectory.jsonassertify.comparator.ArraySizeComparator;
 import com.unitvectory.jsonassertify.comparator.CustomComparator;
 import com.unitvectory.jsonassertify.comparator.DefaultComparator;
@@ -54,7 +55,7 @@ public class ArrayValueMatcherTest {
 		}
 		catch (AssertionError e) {
 			String failureMessage = MessageFormat.format("Exception message ''{0}'', does not match expected pattern ''{1}''", e.getMessage(), expectedMessagePattern);
-			assertTrue(failureMessage, e.getMessage().matches(expectedMessagePattern));
+			assertTrue(e.getMessage().matches(expectedMessagePattern), failureMessage);
 			return;
 		}
 		fail("AssertionError not thrown");
@@ -171,7 +172,7 @@ public class ArrayValueMatcherTest {
 			doTest("a", new ArrayValueMatcher<Object>(comparator), "{a:[{background:white}]}", "{a:{attr1:value1,attr2:value2}}");
 		}
 		catch (IllegalArgumentException e) {
-			assertEquals("Exception message", "ArrayValueMatcher applied to non-array actual value", e.getMessage());
+			assertEquals(e.getMessage(), "ArrayValueMatcher applied to non-array actual value", e.getMessage());
 			return;
 		}
 		fail("Did not throw IllegalArgumentException");

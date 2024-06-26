@@ -15,18 +15,19 @@
 package com.unitvectory.jsonassertify;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.unitvectory.jsonassertify.JSONCompare.compareJSON;
 import static com.unitvectory.jsonassertify.JSONCompareMode.LENIENT;
 import static com.unitvectory.jsonassertify.JSONCompareMode.NON_EXTENSIBLE;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.json.JSONException;
-import org.junit.Test;
-import org.junit.internal.matchers.TypeSafeMatcher;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@code JSONCompare}.

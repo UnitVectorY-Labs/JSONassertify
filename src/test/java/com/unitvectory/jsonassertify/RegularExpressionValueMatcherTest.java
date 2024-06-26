@@ -14,10 +14,10 @@
 
 package com.unitvectory.jsonassertify;
 
-import org.junit.Assert;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.json.JSONException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import com.unitvectory.jsonassertify.Customization;
 import com.unitvectory.jsonassertify.JSONCompareMode;
 import com.unitvectory.jsonassertify.comparator.CustomComparator;
@@ -84,7 +84,7 @@ public class RegularExpressionValueMatcherTest {
     		doTest(ARRAY_ELEMENT_PREFIX, null, "{d:{results:[{__metadata:{uri:\"http://localhost:80/Person('\\\\d+'\\\\)\"}}]}}", JSON_STRING_WITH_ARRAY);
     	}
     	catch (AssertionError e) {
-    		Assert.assertTrue("Invalid exception message returned: "+ e.getMessage(), e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Dynamic expected pattern invalid: "));
+    		assertTrue(e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Dynamic expected pattern invalid: "), "Invalid exception message returned: "+ e.getMessage());
     	}
     }
 
@@ -94,7 +94,7 @@ public class RegularExpressionValueMatcherTest {
     		doTest(ARRAY_ELEMENT_PREFIX, null, "{d:{results:[{__metadata:{uri:\"http://localhost:80/Person\\\\('\\\\w+'\\\\)\"}}]}}", JSON_STRING_WITH_ARRAY);
     	}
     	catch (AssertionError e) {
-    		Assert.assertTrue("Invalid exception message returned: "+ e.getMessage(), e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Dynamic expected pattern did not match value"));
+    		assertTrue(e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Dynamic expected pattern did not match value"), "Invalid exception message returned: "+ e.getMessage());
     	}
     }
 
@@ -104,7 +104,7 @@ public class RegularExpressionValueMatcherTest {
     		doTest(ARRAY_ELEMENT_PREFIX, "http://localhost:80/Person\\\\['\\\\d+'\\\\)", CONSTANT_URI_REGEX_EXPECTED_JSON, JSON_STRING_WITH_ARRAY);
     	}
     	catch (IllegalArgumentException e) {
-    		Assert.assertTrue("Invalid exception message returned: "+ e.getMessage(), e.getMessage().startsWith("Constant expected pattern invalid: "));
+    		assertTrue(e.getMessage().startsWith("Constant expected pattern invalid: "), "Invalid exception message returned: "+ e.getMessage());
     	}
     }
 
@@ -114,7 +114,7 @@ public class RegularExpressionValueMatcherTest {
     		doTest(ARRAY_ELEMENT_PREFIX, "http://localhost:80/Person\\\\('\\\\w+'\\\\)", CONSTANT_URI_REGEX_EXPECTED_JSON, JSON_STRING_WITH_ARRAY);
     	}
     	catch (AssertionError e) {
-    		Assert.assertTrue("Invalid exception message returned: "+ e.getMessage(), e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Constant expected pattern did not match value"));
+    		assertTrue(e.getMessage().startsWith(ARRAY_ELEMENT_PREFIX + ": Constant expected pattern did not match value"), "Invalid exception message returned: "+ e.getMessage());
     	}
     }
 }

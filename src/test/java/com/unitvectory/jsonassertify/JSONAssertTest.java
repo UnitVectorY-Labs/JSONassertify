@@ -14,8 +14,10 @@
 
 package com.unitvectory.jsonassertify;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static com.unitvectory.jsonassertify.JSONCompareMode.LENIENT;
 import static com.unitvectory.jsonassertify.JSONCompareMode.NON_EXTENSIBLE;
 import static com.unitvectory.jsonassertify.JSONCompareMode.STRICT;
@@ -26,8 +28,7 @@ import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import com.unitvectory.jsonassertify.comparator.CustomComparator;
 import com.unitvectory.jsonassertify.comparator.JSONComparator;
 
@@ -236,9 +237,9 @@ public class JSONAssertTest {
     public void testFieldMismatch() throws JSONException {
         JSONCompareResult result = JSONCompare.compareJSON("{name:\"Pat\"}", "{name:\"Sue\"}", STRICT);
         FieldComparisonFailure comparisonFailure = result.getFieldFailures().iterator().next();
-        Assert.assertEquals("Pat", comparisonFailure.getExpected());
-        Assert.assertEquals("Sue", comparisonFailure.getActual());
-        Assert.assertEquals("name", comparisonFailure.getField());
+        assertEquals("Pat", comparisonFailure.getExpected());
+        assertEquals("Sue", comparisonFailure.getActual());
+        assertEquals("name", comparisonFailure.getField());
     }
 
     @Test
@@ -297,22 +298,22 @@ public class JSONAssertTest {
         JSONAssert.assertEquals(actual, expected, true);
     }
 
-    @Test(expected = AssertionError.class)
-    public void testAssertNotEqualsWhenEqualStrict() throws JSONException {
+    @Test
+    public void testAssertNotEqualsWhenEqualStrict() {
         JSONObject expected = new JSONObject();
         JSONObject actual = new JSONObject();
         expected.put("id", Integer.valueOf(12345));
         actual.put("id", Double.valueOf(12345));
-        JSONAssert.assertNotEquals(expected, actual, true);
+        assertThrows(AssertionError.class, () -> JSONAssert.assertNotEquals(expected, actual, true));
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualsWhenEqualLenient() throws JSONException {
         JSONObject expected = new JSONObject();
         JSONObject actual = new JSONObject();
         expected.put("id", Integer.valueOf(12345));
         actual.put("id", Double.valueOf(12345));
-        JSONAssert.assertNotEquals(expected, actual, false);
+        assertThrows(AssertionError.class, () -> JSONAssert.assertNotEquals(expected, actual, false));
     }
 
     @Test()
@@ -325,7 +326,7 @@ public class JSONAssertTest {
         JSONAssert.assertNotEquals(expected, actual, true);
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualsWhenEqualDiffObjectsLenient() throws JSONException {
         JSONObject expected = new JSONObject();
         JSONObject actual = new JSONObject();
@@ -333,7 +334,7 @@ public class JSONAssertTest {
         expected.put("name", "Joe");
         actual.put("name", "Joe");
         actual.put("id", Double.valueOf(12345));
-        JSONAssert.assertNotEquals(expected, actual, false);
+        assertThrows(AssertionError.class, () -> JSONAssert.assertNotEquals(expected, actual, false));
     }
 
     @Test()
@@ -648,7 +649,7 @@ public class JSONAssertTest {
     {
         String message = expected + " == " + actual + " (" + compareMode + ")";
         JSONCompareResult result = JSONCompare.compareJSON(expected, actual, compareMode);
-        Assert.assertTrue(message + "\n  " + result.getMessage(), result.passed());
+        assertTrue(result.passed(), message + "\n  " + result.getMessage());
     }
 
     private void testFail(String expected, String actual, JSONCompareMode compareMode)
@@ -656,7 +657,7 @@ public class JSONAssertTest {
     {
         String message = expected + " != " + actual + " (" + compareMode + ")";
         JSONCompareResult result = JSONCompare.compareJSON(expected, actual, compareMode);
-        Assert.assertTrue(message, result.failed());
+        assertTrue(result.failed(), message);
     }
     
     private void performAssertEqualsTestForMessageVerification(

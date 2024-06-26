@@ -14,9 +14,10 @@
 
 package com.unitvectory.jsonassertify;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.json.JSONObject;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for our external/third-party dependencies.
@@ -35,10 +36,10 @@ public class DependencyTest {
         String targetString = target.toString();
 
         JSONObject value = new JSONObject().put("id", target);
-        Assert.assertEquals(target, (Long) value.getLong("id"));  //Correct: when put as long getLong is correct
+        assertEquals(target, (Long) value.getLong("id"));  //Correct: when put as long getLong is correct
 
         value = new JSONObject().put("id", targetString);
-        Assert.assertEquals(target, (Long) Long.parseLong(value.getString("id"))); //Correct: when put as String getString is correct
-        Assert.assertEquals(target, (Long) value.getLong("id")); //Bug: Having json convert the string to long fails
+        assertEquals(target, (Long) Long.parseLong(value.getString("id"))); //Correct: when put as String getString is correct
+        assertEquals(target, (Long) value.getLong("id")); //Bug: Having json convert the string to long fails
     }
 }

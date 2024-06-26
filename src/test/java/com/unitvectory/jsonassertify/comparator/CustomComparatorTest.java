@@ -14,10 +14,11 @@
 
 package com.unitvectory.jsonassertify.comparator;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import com.unitvectory.jsonassertify.JSONCompare;
 import com.unitvectory.jsonassertify.JSONCompareMode;
 import com.unitvectory.jsonassertify.JSONCompareResult;
@@ -46,8 +47,8 @@ public class CustomComparatorTest {
                 "[{id:1}, {id:3}, {id:6}, {id:7}]", new ArrayOfJsonObjectsComparator(JSONCompareMode.LENIENT)
         );
 
-        Assert.assertTrue(compareResult.failed());
+        assertTrue(compareResult.failed());
         String message = compareResult.getMessage().replaceAll("\n", "");
-        Assert.assertTrue(message, message.matches(".*id=5.*Expected.*id=6.*Unexpected.*id=7.*Unexpected.*"));
+        assertTrue(message.matches(".*id=5.*Expected.*id=6.*Unexpected.*id=7.*Unexpected.*"), message);
     }
 }

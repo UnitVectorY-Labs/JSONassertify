@@ -14,13 +14,13 @@
 
 package com.unitvectory.jsonassertify.comparator;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.text.MessageFormat;
 
 import org.json.JSONException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import com.unitvectory.jsonassertify.JSONAssert;
 import com.unitvectory.jsonassertify.JSONCompareMode;
 
@@ -44,7 +44,7 @@ public class ArraySizeComparatorTest {
 		}
 		catch (AssertionError e) {
 			String failureMessage = MessageFormat.format("Exception message ''{0}'', does not match expected pattern ''{1}''", e.getMessage(), expectedMessagePattern);
-			assertTrue(failureMessage, e.getMessage().matches(expectedMessagePattern));
+			assertTrue(e.getMessage().matches(expectedMessagePattern), failureMessage);
 			return;
 		}
 		fail("AssertionError not thrown");

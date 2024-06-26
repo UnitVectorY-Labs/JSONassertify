@@ -14,15 +14,15 @@
 
 package com.unitvectory.jsonassertify;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
 import static com.unitvectory.jsonassertify.JSONCompareMode.LENIENT;
 import static com.unitvectory.jsonassertify.JSONCompareMode.NON_EXTENSIBLE;
 import static com.unitvectory.jsonassertify.JSONCompareMode.STRICT;
 import static com.unitvectory.jsonassertify.JSONCompareMode.STRICT_ORDER;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link JSONCompareMode}
