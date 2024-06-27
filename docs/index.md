@@ -1,11 +1,11 @@
-# JSONAssertify
+# Intrduction
 
-Write JSON unit tests in less code.  Great for testing REST interfaces.
+[JSONassertify](https://github.com/UnitVectorY-Labs/JSONassertify) is a fork of [JSONassert](https://github.com/skyscreamer/JSONassert) that aims to update and enhance the codebase, introducing some necessary breaking changes while continuing to support older Java versions.
 
 Supported test frameworks:
 - [JUnit](http://junit.org)
 
-## Quick Start
+# Quick Start
 
 JSONAssertify is avaialble on Maven Central and can be used by including the following in your project's `pom.xml`:
 
@@ -30,7 +30,7 @@ public void testGetUser() {
 
 It is recommended that you leave `strictMode` off, so your tests will be less brittle. Turn it on if you need to enforce a particular order for arrays, or if you want to ensure that the actual JSON does not have any fields beyond what's expected.
 
-## Examples
+# Examples
 
 With JSONAssertify, you write and maintain something like this:
 
@@ -89,11 +89,11 @@ friends[id=3].pets[]: Expected bird, but not found ; friends[id=3].pets[]: Conta
 which tells you that the pets array under the friend where id=3 was supposed to contain "bird", but had "cat" instead. 
 (Maybe the cat ate the bird?)
 
-## Cookbook
+# Cookbook
 
 Assertion parameters can be a java.lang.String with JSON data, an org.json.JSONObject, or an org.json.JSONArray. For readability, we'll use strings in the following examples.
 
-### A really simple example. Get a JSON object and test its ID:
+A really simple example. Get a JSON object and test its ID:
 
 ```java
 @Test
