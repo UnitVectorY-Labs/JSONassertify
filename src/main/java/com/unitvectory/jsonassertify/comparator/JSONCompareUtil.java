@@ -35,8 +35,12 @@ import org.json.JSONObject;
  * @author Solomon Duskis
  */
 public final class JSONCompareUtil {
+
     private static Integer INTEGER_ONE = Integer.valueOf(1);
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private JSONCompareUtil() {
     }
 

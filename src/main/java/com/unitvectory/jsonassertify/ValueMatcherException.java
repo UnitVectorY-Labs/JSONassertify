@@ -13,8 +13,6 @@
 */
 package com.unitvectory.jsonassertify;
 
-import java.io.Serializable;
-
 /**
  * Exception that may be thrown by {@link ValueMatcher} subclasses to provide
  * more detail on why matches method failed.
@@ -24,7 +22,7 @@ import java.io.Serializable;
  * @author Corby Page
  * @author Solomon Duskis
  */
-public class ValueMatcherException extends RuntimeException implements Serializable {
+public class ValueMatcherException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
@@ -89,5 +87,4 @@ public class ValueMatcherException extends RuntimeException implements Serializa
 	public String getActual() {
 		return actual;
 	}
-
 }
