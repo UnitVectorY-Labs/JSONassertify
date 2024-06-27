@@ -22,4 +22,8 @@ gh_edit_view_mode: "tree"
 nav_external_links:
   - title: Java Docs
     url: https://javadoc.io/doc/com.unitvectory/jsonassertify/latest/index.html
+    opens_in_new_tab: true
+  - title: Maven Central
+    url: https://central.sonatype.com/artifact/com.unitvectory/jsonassertify
+    opens_in_new_tab: true
 
