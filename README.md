@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![codecov](https://codecov.io/gh/UnitVectorY-Labs/JSONassertify/graph/badge.svg?token=AkErQGHlR1)](https://codecov.io/gh/UnitVectorY-Labs/JSONassertify)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Maven Central](https://img.shields.io/maven-central/v/com.unitvectory/jsonassertify)](https://central.sonatype.com/artifact/com.unitvectory/jsonassertify) [![javadoc](https://javadoc.io/badge2/com.unitvectory/jsonassertify/javadoc.svg)](https://javadoc.io/doc/com.unitvectory/jsonassertify) [![codecov](https://codecov.io/gh/UnitVectorY-Labs/JSONassertify/graph/badge.svg?token=AkErQGHlR1)](https://codecov.io/gh/UnitVectorY-Labs/JSONassertify)
 
 JSONassertify
 =============
@@ -29,8 +29,6 @@ Things that will stay the same:
 - Same classes and same methods (just under a different package)
 - Same Apache 2.0 License as the original project
 
-**Please note:** This project is a work in progress and has not yet reached its initial release.
-
 Migration Guide and Usage
 -------------------------
 
@@ -38,7 +36,14 @@ The intent is for JSONassertify to be a drop in replacement for JSONassert. Migr
 
 1. Update the dependency to use JSONassertify
 
-(ONCE RELEASED ON MAVEN CENTRAL DEPENDENCY GOES HERE)
+```xml
+<dependency>
+    <groupId>com.unitvectory</groupId>
+    <artifactId>jsonassertify</artifactId>
+    <version>0.0.1</version>
+    <scope>test</scope>
+</dependency>
+```
 
 2. Update the package imports
 

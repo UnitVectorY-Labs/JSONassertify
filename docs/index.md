@@ -9,7 +9,14 @@ Supported test frameworks:
 
 JSONAssertify is avaialble on Maven Central and can be used by including the following in your project's `pom.xml`:
 
-ADD ONCE RELEASED TO MAVEN CENTRAL
+```xml
+<dependency>
+    <groupId>com.unitvectory</groupId>
+    <artifactId>jsonassertify</artifactId>
+    <version>0.0.1</version>
+    <scope>test</scope>
+</dependency>
+```
 
 Syntax is simple, and similar to JUnit Assert:
 
