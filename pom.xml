@@ -9,7 +9,7 @@
     <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>JSONassert</name>
+    <name>JSONassertify</name>
     <description>Write JSON unit tests in less code. Great for testing REST interfaces.</description>
     <url>https://github.com/UnitVectorY-Labs/JSONassertify</url>
 
