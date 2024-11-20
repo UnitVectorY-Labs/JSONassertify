@@ -20,7 +20,7 @@ JSONAssertify is avaialble on Maven Central and can be used by including the fol
 <dependency>
     <groupId>com.unitvectory</groupId>
     <artifactId>jsonassertify</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <scope>test</scope>
 </dependency>
 ```
