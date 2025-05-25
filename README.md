@@ -40,7 +40,7 @@ The intent is for JSONassertify to be a drop in replacement for JSONassert. Migr
 <dependency>
     <groupId>com.unitvectory</groupId>
     <artifactId>jsonassertify</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.4</version>
     <scope>test</scope>
 </dependency>
 ```
