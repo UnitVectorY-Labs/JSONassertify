@@ -11,7 +11,7 @@ on:
 jobs:
   add-to-project:
     name: Add to project
-    runs-on: ubuntu-latest
+    runs-on: arc-runner-set
     steps:
       - uses: actions/add-to-project@244f685bbc3b7adfa8466e08b698b5577571133e # v1.0.2
         with:
