@@ -1,7 +1,7 @@
 title: JSONassertify
 description: "Write JSON unit tests in less code.  Great for testing REST interfaces."
 
-remote_theme: just-the-docs/just-the-docs@v0.10.1
+remote_theme: just-the-docs/just-the-docs@v0.12.0
 plugins:
   - jekyll-remote-theme
 
