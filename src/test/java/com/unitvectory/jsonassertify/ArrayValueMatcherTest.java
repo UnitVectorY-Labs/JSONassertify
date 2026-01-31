@@ -14,6 +14,7 @@
 package com.unitvectory.jsonassertify;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -305,5 +306,16 @@ public class ArrayValueMatcherTest {
 		Customization customization = new Customization("a", new ArrayValueMatcher<Object>(comparator, 1));
 		JSONAssert.assertEquals("{a:9}", ARRAY_OF_JSONARRAYS,
 				new CustomComparator(JSONCompareMode.LENIENT, customization));
+	}
+
+	@Test
+	public void testEqualMethodReturnsFalse() {
+		ArrayValueMatcher<Object> matcher = new ArrayValueMatcher<>(comparator);
+		// ArrayValueMatcher implements ValueMatcher<T> which requires the equal(T, T) method.
+		// However, ArrayValueMatcher is designed to be used via LocationAwareValueMatcher's
+		// equal(String prefix, T actual, T expected, JSONCompareResult result) method instead.
+		// The simple equal(T, T) method returns false because comparison requires the context
+		// of a JSONCompareResult to record failures properly.
+		assertFalse(matcher.equal("value1", "value2"));
 	}
 }
