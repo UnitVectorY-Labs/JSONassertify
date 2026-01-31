@@ -311,11 +311,8 @@ public class ArrayValueMatcherTest {
 	@Test
 	public void testEqualMethodReturnsFalse() {
 		ArrayValueMatcher<Object> matcher = new ArrayValueMatcher<>(comparator);
-		// ArrayValueMatcher implements ValueMatcher<T> which requires the equal(T, T) method.
-		// However, ArrayValueMatcher is designed to be used via LocationAwareValueMatcher's
-		// equal(String prefix, T actual, T expected, JSONCompareResult result) method instead.
-		// The simple equal(T, T) method returns false because comparison requires the context
-		// of a JSONCompareResult to record failures properly.
+		// The non-location-aware equal() method always returns false by design;
+		// use the LocationAwareValueMatcher.equal() method for actual comparisons.
 		assertFalse(matcher.equal("value1", "value2"));
 	}
 }
