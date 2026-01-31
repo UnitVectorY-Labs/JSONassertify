@@ -229,6 +229,8 @@ public class AdditionalCoverageTest {
 
     @Test
     public void testParseJSONWhitespaceOnly() {
+        // Test whitespace-only input, which is different from empty string 
+        // as it tests the trim() behavior in the parser
         assertThrows(JSONException.class, () -> 
             JSONParser.parseJSON("   "));
     }
@@ -412,7 +414,11 @@ public class AdditionalCoverageTest {
     public void testArrayValueMatcherEqualMethod() {
         ArrayValueMatcher<Object> matcher = new ArrayValueMatcher<>(
             new DefaultComparator(JSONCompareMode.LENIENT));
-        // The equal(T o1, T o2) method just returns false as it's not meant to be called
+        // ArrayValueMatcher implements ValueMatcher<T> which requires the equal(T, T) method.
+        // However, ArrayValueMatcher is designed to be used via LocationAwareValueMatcher's
+        // equal(String prefix, T actual, T expected, JSONCompareResult result) method instead.
+        // The simple equal(T, T) method returns false because comparison requires the context
+        // of a JSONCompareResult to record failures properly.
         assertFalse(matcher.equal("value1", "value2"));
     }
 }
