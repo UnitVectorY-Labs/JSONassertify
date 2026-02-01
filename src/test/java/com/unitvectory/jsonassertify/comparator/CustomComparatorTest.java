@@ -18,9 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
+import com.unitvectory.jsonassertify.Customization;
 import com.unitvectory.jsonassertify.JSONCompare;
 import com.unitvectory.jsonassertify.JSONCompareMode;
 import com.unitvectory.jsonassertify.JSONCompareResult;
+import com.unitvectory.jsonassertify.ValueMatcher;
 
 /**
  * @author Ivan Zaytsev
@@ -51,5 +53,15 @@ public class CustomComparatorTest {
         assertTrue(compareResult.failed());
         String message = compareResult.getMessage().replaceAll("\n", "");
         assertTrue(message.matches(".*id=5.*Expected.*id=6.*Unexpected.*id=7.*Unexpected.*"), message);
+    }
+
+    @Test
+    public void testWithFailingMatcher() throws JSONException {
+        ValueMatcher<Object> matcher = (o1, o2) -> false;
+        Customization customization = new Customization("id", matcher);
+        CustomComparator comparator = new CustomComparator(JSONCompareMode.STRICT, customization);
+        
+        JSONCompareResult result = JSONCompare.compareJSON("{id:1}", "{id:1}", comparator);
+        assertTrue(result.failed());
     }
 }

@@ -14,6 +14,7 @@
 package com.unitvectory.jsonassertify;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -305,5 +306,13 @@ public class ArrayValueMatcherTest {
 		Customization customization = new Customization("a", new ArrayValueMatcher<Object>(comparator, 1));
 		JSONAssert.assertEquals("{a:9}", ARRAY_OF_JSONARRAYS,
 				new CustomComparator(JSONCompareMode.LENIENT, customization));
+	}
+
+	@Test
+	public void testEqualMethodReturnsFalse() {
+		ArrayValueMatcher<Object> matcher = new ArrayValueMatcher<>(comparator);
+		// The non-location-aware equal() method always returns false by design;
+		// use the LocationAwareValueMatcher.equal() method for actual comparisons.
+		assertFalse(matcher.equal("value1", "value2"));
 	}
 }

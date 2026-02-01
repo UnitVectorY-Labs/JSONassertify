@@ -876,4 +876,199 @@ public class JSONAssertTest {
         assertTrue(ae.getMessage().contains(message));
         assertTrue(ae.getMessage().startsWith(message));
     }
+
+    // ===== Type mismatch tests =====
+
+    @Test
+    public void testAssertEqualsExpectingArrayButPassingObject() throws JSONException {
+        JSONObject actual = new JSONObject();
+        actual.put("id", 1);
+        // Passing an array expected string but a JSONObject actual should throw
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertEquals("[1,2,3]", actual, LENIENT));
+    }
+
+    @Test
+    public void testAssertEqualsExpectingArrayButPassingObjectWithMessage() throws JSONException {
+        JSONObject actual = new JSONObject();
+        actual.put("id", 1);
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertEquals("Custom message", "[1,2,3]", actual, LENIENT));
+    }
+
+    @Test
+    public void testAssertNotEqualsExpectingArrayButPassingObject() throws JSONException {
+        JSONObject actual = new JSONObject();
+        actual.put("id", 1);
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertNotEquals("[1,2,3]", actual, LENIENT));
+    }
+
+    @Test
+    public void testAssertNotEqualsExpectingArrayButPassingObjectWithMessage() throws JSONException {
+        JSONObject actual = new JSONObject();
+        actual.put("id", 1);
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertNotEquals("Custom message", "[1,2,3]", actual, LENIENT));
+    }
+
+    @Test
+    public void testAssertEqualsExpectingObjectButPassingArray() throws JSONException {
+        JSONArray actual = new JSONArray();
+        actual.put(1);
+        actual.put(2);
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertEquals("{id:1}", actual, LENIENT));
+    }
+
+    @Test
+    public void testAssertNotEqualsExpectingObjectButPassingArray() throws JSONException {
+        JSONArray actual = new JSONArray();
+        actual.put(1);
+        actual.put(2);
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertNotEquals("{id:1}", actual, LENIENT));
+    }
+
+    @Test
+    public void testAssertNotEqualsExpectingObjectButPassingArrayWithMessage() throws JSONException {
+        JSONArray actual = new JSONArray();
+        actual.put(1);
+        actual.put(2);
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertNotEquals("Message", "{id:1}", actual, LENIENT));
+    }
+
+    // ===== Null string tests =====
+
+    @Test
+    public void testAssertEqualsStringNullExpected() throws JSONException {
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertEquals(null, "{id:1}", LENIENT));
+    }
+
+    @Test
+    public void testAssertEqualsStringNullActual() throws JSONException {
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertEquals("{id:1}", (String) null, LENIENT));
+    }
+
+    // ===== Comparator-based assertion tests =====
+
+    @Test
+    public void testAssertNotEqualsWithComparator() throws JSONException {
+        JSONComparator comparator = new com.unitvectory.jsonassertify.comparator.DefaultComparator(LENIENT);
+        JSONAssert.assertNotEquals("{id:1}", "{id:2}", comparator);
+    }
+
+    @Test
+    public void testAssertNotEqualsWithComparatorAndMessage() throws JSONException {
+        JSONComparator comparator = new com.unitvectory.jsonassertify.comparator.DefaultComparator(LENIENT);
+        JSONAssert.assertNotEquals("Message", "{id:1}", "{id:2}", comparator);
+    }
+
+    @Test
+    public void testAssertNotEqualsWithComparatorFailsWhenEqual() throws JSONException {
+        JSONComparator comparator = new com.unitvectory.jsonassertify.comparator.DefaultComparator(LENIENT);
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertNotEquals("{id:1}", "{id:1}", comparator));
+    }
+
+    @Test
+    public void testAssertNotEqualsWithComparatorAndMessageFailsWhenEqual() throws JSONException {
+        JSONComparator comparator = new com.unitvectory.jsonassertify.comparator.DefaultComparator(LENIENT);
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertNotEquals("Message", "{id:1}", "{id:1}", comparator));
+    }
+
+    @Test
+    public void testAssertEqualsJSONObjectWithComparator() throws JSONException {
+        JSONComparator comparator = new com.unitvectory.jsonassertify.comparator.DefaultComparator(LENIENT);
+        JSONObject expected = new JSONObject();
+        JSONObject actual = new JSONObject();
+        expected.put("id", 1);
+        actual.put("id", 1);
+        JSONAssert.assertEquals(expected, actual, comparator);
+    }
+
+    @Test
+    public void testAssertEqualsJSONObjectWithComparatorAndMessage() throws JSONException {
+        JSONComparator comparator = new com.unitvectory.jsonassertify.comparator.DefaultComparator(LENIENT);
+        JSONObject expected = new JSONObject();
+        JSONObject actual = new JSONObject();
+        expected.put("id", 1);
+        actual.put("id", 1);
+        JSONAssert.assertEquals("Message", expected, actual, comparator);
+    }
+
+    @Test
+    public void testAssertEqualsJSONObjectWithComparatorFails() throws JSONException {
+        JSONComparator comparator = new com.unitvectory.jsonassertify.comparator.DefaultComparator(LENIENT);
+        JSONObject expected = new JSONObject();
+        JSONObject actual = new JSONObject();
+        expected.put("id", 1);
+        actual.put("id", 2);
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertEquals(expected, actual, comparator));
+    }
+
+    @Test
+    public void testAssertNotEqualsJSONObjectWithComparator() throws JSONException {
+        JSONComparator comparator = new com.unitvectory.jsonassertify.comparator.DefaultComparator(LENIENT);
+        JSONObject expected = new JSONObject();
+        JSONObject actual = new JSONObject();
+        expected.put("id", 1);
+        actual.put("id", 2);
+        JSONAssert.assertNotEquals(expected, actual, comparator);
+    }
+
+    @Test
+    public void testAssertNotEqualsJSONObjectWithComparatorAndMessage() throws JSONException {
+        JSONComparator comparator = new com.unitvectory.jsonassertify.comparator.DefaultComparator(LENIENT);
+        JSONObject expected = new JSONObject();
+        JSONObject actual = new JSONObject();
+        expected.put("id", 1);
+        actual.put("id", 2);
+        JSONAssert.assertNotEquals("Message", expected, actual, comparator);
+    }
+
+    @Test
+    public void testAssertNotEqualsJSONObjectWithComparatorFails() throws JSONException {
+        JSONComparator comparator = new com.unitvectory.jsonassertify.comparator.DefaultComparator(LENIENT);
+        JSONObject expected = new JSONObject();
+        JSONObject actual = new JSONObject();
+        expected.put("id", 1);
+        actual.put("id", 1);
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertNotEquals(expected, actual, comparator));
+    }
+
+    @Test
+    public void testAssertEqualsJSONArrayWithCompareMode() throws JSONException {
+        JSONArray expected = new JSONArray();
+        JSONArray actual = new JSONArray();
+        expected.put(1);
+        expected.put(2);
+        actual.put(1);
+        actual.put(2);
+        JSONAssert.assertEquals(expected, actual, LENIENT);
+    }
+
+    @Test
+    public void testAssertEqualsJSONArrayWithCompareModeFails() throws JSONException {
+        JSONArray expected = new JSONArray();
+        JSONArray actual = new JSONArray();
+        expected.put(1);
+        expected.put(2);
+        actual.put(1);
+        actual.put(3);
+        assertThrows(AssertionError.class, () -> 
+            JSONAssert.assertEquals(expected, actual, LENIENT));
+    }
+
+    @Test
+    public void testAssertEqualsSameStringReference() throws JSONException {
+        String json = "{id:1}";
+        JSONAssert.assertEquals(json, json, LENIENT);
+    }
 }

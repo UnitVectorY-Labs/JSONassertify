@@ -182,4 +182,13 @@ public class JSONCompareTest {
             }
         };
     }
+
+    @Test
+    public void succeedsWithNestedArraysInLenientMode() throws JSONException {
+        // Test case with nested arrays where order doesn't matter (LENIENT)
+        assertTrue(compareJSON(
+            "{arr:[[1,2],[3,4]]}",
+            "{arr:[[3,4],[1,2]]}",
+            LENIENT).passed());
+    }
 }

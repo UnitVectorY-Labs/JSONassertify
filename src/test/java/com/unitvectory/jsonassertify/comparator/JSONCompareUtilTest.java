@@ -13,10 +13,13 @@
 */
 package com.unitvectory.jsonassertify.comparator;
 
+import org.json.JSONArray;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,5 +61,21 @@ public class JSONCompareUtilTest {
         assertNull(cardinalityMap.get("C"));
         assertEquals(NUM_D, cardinalityMap.get("D").intValue());
         assertEquals(NUM_E, cardinalityMap.get("E").intValue());
+    }
+
+    @Test
+    public void testAllJSONArraysTrue() throws Exception {
+        JSONArray array = new JSONArray();
+        array.put(new JSONArray("[1,2]"));
+        array.put(new JSONArray("[3,4]"));
+        assertTrue(JSONCompareUtil.allJSONArrays(array));
+    }
+
+    @Test
+    public void testAllJSONArraysFalse() throws Exception {
+        JSONArray array = new JSONArray();
+        array.put(new JSONArray("[1,2]"));
+        array.put("not an array");
+        assertFalse(JSONCompareUtil.allJSONArrays(array));
     }
 }
