@@ -32,16 +32,6 @@ public class CustomizationTest {
     }
 
     @Test
-    @SuppressWarnings("deprecation")
-    public void testDeprecatedMatchesMethod() {
-        ValueMatcher<Object> matcher = (o1, o2) -> o1.equals(o2);
-        Customization customization = new Customization("test", matcher);
-        // Test deprecated matches method
-        assertTrue(customization.matches("value", "value"));
-        assertFalse(customization.matches("value1", "value2"));
-    }
-
-    @Test
     public void testAppliesToPathExactMatch() {
         ValueMatcher<Object> matcher = (o1, o2) -> true;
         Customization customization = new Customization("user.name", matcher);

@@ -24,18 +24,6 @@ import org.junit.jupiter.api.Test;
 public class JSONCompareResultTest {
 
     @Test
-    @SuppressWarnings("deprecation")
-    public void testDeprecatedGetters() throws JSONException {
-        JSONCompareResult result = JSONCompare.compareJSON("{name:\"Pat\"}", "{name:\"Sue\"}", JSONCompareMode.STRICT);
-        assertTrue(result.failed());
-        
-        // Test deprecated getters
-        assertEquals("name", result.getField());
-        assertEquals("Pat", result.getExpected());
-        assertEquals("Sue", result.getActual());
-    }
-
-    @Test
     public void testToStringWithFailure() throws JSONException {
         JSONCompareResult result = JSONCompare.compareJSON("{id:1}", "{id:2}", JSONCompareMode.STRICT);
         assertTrue(result.failed());
