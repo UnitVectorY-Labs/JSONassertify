@@ -15,6 +15,7 @@ package com.unitvectory.jsonassertify;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +47,22 @@ public class JSONArrayWithNullTest {
         JSONArray expected = new JSONArray().put(shared).put(shared).put(1);
         JSONArray actual = new JSONArray().put(shared).put(new JSONObject().put("extra", true)).put(1);
         assertFalse(JSONCompare.compareJSON(expected, actual, JSONCompareMode.NON_EXTENSIBLE).passed());
+    }
+
+    @Test
+    public void strictNullMismatchesReportFailures() {
+        JSONCompareResult expectedNull = JSONCompare.compareJSON("[null]", "[1]", JSONCompareMode.STRICT);
+        JSONCompareResult actualNull = JSONCompare.compareJSON("[1]", "[null]", JSONCompareMode.STRICT);
+
+        assertTrue(expectedNull.failed());
+        assertEquals("[0]\nExpected: null\n     got: 1\n", expectedNull.getMessage());
+        assertEquals(1, expectedNull.getFieldFailures().size());
+        assertEquals("[0]", expectedNull.getFieldFailures().get(0).getField());
+        assertTrue(actualNull.failed());
+        assertEquals("[0]\nExpected: 1\n     got: null\n", actualNull.getMessage());
+        assertEquals(1, actualNull.getFieldFailures().size());
+        assertTrue(JSONCompare.compareJSON("[null]", "[null]", JSONCompareMode.STRICT).passed());
+        assertTrue(JSONCompare.compareJSON("[1]", "[2]", JSONCompareMode.STRICT).failed());
     }
 
     @Test

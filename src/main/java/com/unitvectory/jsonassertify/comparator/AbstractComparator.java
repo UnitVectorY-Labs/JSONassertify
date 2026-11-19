@@ -231,13 +231,17 @@ public abstract class AbstractComparator implements JSONComparator {
                     continue;
                 }
                 if (expectedElement instanceof JSONObject) {
-                    if (compareJSON((JSONObject) expectedElement, (JSONObject) actualElement).passed()) {
+                    JSONCompareResult candidateResult = new JSONCompareResult();
+                    compareJSON(key + "[" + i + "]", (JSONObject) expectedElement, (JSONObject) actualElement, candidateResult);
+                    if (candidateResult.passed()) {
                         matched.add(j);
                         matchFound = true;
                         break;
                     }
                 } else if (expectedElement instanceof JSONArray) {
-                    if (compareJSON((JSONArray) expectedElement, (JSONArray) actualElement).passed()) {
+                    JSONCompareResult candidateResult = new JSONCompareResult();
+                    compareJSONArray(key + "[" + i + "]", (JSONArray) expectedElement, (JSONArray) actualElement, candidateResult);
+                    if (candidateResult.passed()) {
                         matched.add(j);
                         matchFound = true;
                         break;
