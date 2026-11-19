@@ -50,23 +50,16 @@ public class JSONParser {
    */
   public static Object parseJSON(final String s) throws JSONException {
     final String trimmed = s.trim();
-    if (trimmed.equals("true") || trimmed.equals("false") || trimmed.equals("null")) {
+    if (trimmed.startsWith("{")) {
+      return new JSONObject(s);
+    } else if (trimmed.startsWith("[")) {
+      return new JSONArray(s);
+    } else if (trimmed.startsWith("\"") || trimmed.matches(NUMBER_REGEX)
+        || trimmed.equals("true") || trimmed.equals("false") || trimmed.equals("null")) {
       return new JSONString() {
         @Override
         public String toJSONString() {
           return trimmed;
-        }
-      };
-    } else if (s.trim().startsWith("{")) {
-      return new JSONObject(s);
-    } else if (s.trim().startsWith("[")) {
-      return new JSONArray(s);
-    } else if (s.trim().startsWith("\"")
-        || s.trim().matches(NUMBER_REGEX)) {
-      return new JSONString() {
-        @Override
-        public String toJSONString() {
-          return s;
         }
       };
     }

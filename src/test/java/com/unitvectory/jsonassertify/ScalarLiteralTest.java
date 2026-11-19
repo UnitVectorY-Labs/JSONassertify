@@ -33,4 +33,13 @@ class ScalarLiteralTest {
             assertThrows(JSONException.class, () -> JSONParser.parseJSON(value));
         }
     }
+
+    @Test
+    void ignoresSurroundingWhitespaceForOtherScalars() {
+        for (String scalar : new String[] {"123", "-1.5e2", "\"hello world\"", "\" padded \""}) {
+            assertTrue(JSONCompare.compareJSON(" \t" + scalar + "\n", scalar, JSONCompareMode.LENIENT).passed());
+            assertTrue(JSONCompare.compareJSON(scalar, "\n" + scalar + " ", JSONCompareMode.LENIENT).passed());
+        }
+        assertTrue(JSONCompare.compareJSON("\" padded \"", "\"padded\"", JSONCompareMode.LENIENT).failed());
+    }
 }
