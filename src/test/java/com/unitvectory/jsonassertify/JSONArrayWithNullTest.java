@@ -13,6 +13,9 @@
 */
 package com.unitvectory.jsonassertify;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +29,24 @@ import org.junit.jupiter.api.Test;
  * @author Solomon Duskis
  */
 public class JSONArrayWithNullTest {
+
+    @Test
+    public void unorderedMixedArraysConsumeEachMatchingElementOnce() {
+        for (JSONCompareMode mode : new JSONCompareMode[] { JSONCompareMode.LENIENT, JSONCompareMode.NON_EXTENSIBLE }) {
+            assertFalse(JSONCompare.compareJSON("[null,null,{}]", "[null,{},{}]", mode).passed());
+            assertFalse(JSONCompare.compareJSON("[null,{},{}]", "[null,null,{}]", mode).passed());
+            assertTrue(JSONCompare.compareJSON("[null,null,{}]", "[null,{},null]", mode).passed());
+            assertFalse(JSONCompare.compareJSON("[[null,null,{}],1]", "[1,[null,{},{}]]", mode).passed());
+        }
+    }
+
+    @Test
+    public void unorderedMixedArraysDoNotReuseIdenticalObjectReferences() {
+        JSONObject shared = new JSONObject();
+        JSONArray expected = new JSONArray().put(shared).put(shared).put(1);
+        JSONArray actual = new JSONArray().put(shared).put(new JSONObject().put("extra", true)).put(1);
+        assertFalse(JSONCompare.compareJSON(expected, actual, JSONCompareMode.NON_EXTENSIBLE).passed());
+    }
 
     @Test
     public void testJSONArrayWithNullValue() throws JSONException {

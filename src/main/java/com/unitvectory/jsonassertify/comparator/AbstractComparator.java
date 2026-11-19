@@ -214,8 +214,12 @@ public abstract class AbstractComparator implements JSONComparator {
             Object expectedElement = JSONCompareUtil.getObjectOrNull(expected, i);
             boolean matchFound = false;
             for (int j = 0; j < actual.length(); ++j) {
+                if (matched.contains(j)) {
+                    continue;
+                }
                 Object actualElement = JSONCompareUtil.getObjectOrNull(actual, j);
                 if (expectedElement == actualElement) {
+                    matched.add(j);
                     matchFound = true;
                     break;
                 }
@@ -223,7 +227,7 @@ public abstract class AbstractComparator implements JSONComparator {
                         || (expectedElement != null && actualElement == null)) {
                     continue;
                 }
-                if (matched.contains(j) || !actualElement.getClass().equals(expectedElement.getClass())) {
+                if (!actualElement.getClass().equals(expectedElement.getClass())) {
                     continue;
                 }
                 if (expectedElement instanceof JSONObject) {
