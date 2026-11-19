@@ -1,8 +1,11 @@
 package com.unitvectory.jsonassertify;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import com.unitvectory.jsonassertify.comparator.DefaultComparator;
 
 class LargeNumberAuditTest {
     @Test
@@ -27,5 +30,21 @@ class LargeNumberAuditTest {
     void equivalentNumbersWithDifferentRepresentationsCompareEqual() {
         JSONAssert.assertEquals("{\"n\":1}", "{\"n\":1.00}", true);
         JSONAssert.assertEquals("[100000000000000000000]", "[1e20]", true);
+    }
+
+    @Test
+    void nonFiniteNumbersRetainDoubleComparisonBehavior() {
+        DefaultComparator comparator = new DefaultComparator(JSONCompareMode.STRICT);
+        JSONCompareResult equal = new JSONCompareResult();
+        comparator.compareValues("n", Double.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, equal);
+        assertTrue(equal.passed());
+
+        JSONCompareResult different = new JSONCompareResult();
+        comparator.compareValues("n", Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, different);
+        assertTrue(different.failed());
+
+        JSONCompareResult nan = new JSONCompareResult();
+        comparator.compareValues("n", Double.NaN, Float.NaN, nan);
+        assertTrue(nan.failed());
     }
 }
