@@ -48,4 +48,38 @@ class CustomizationAuditTest {
                 "{\"items\":[{\"id\":\"a\",\"value\":1},{\"id\":\"b\",\"value\":2}]}",
                 "{\"items\":[{\"id\":\"x\",\"value\":2},{\"id\":\"x\",\"value\":1}]}", custom));
     }
+
+    @Test void unrelatedCustomizationKeepsNormalKeyMatching() {
+        CustomComparator custom = new CustomComparator(JSONCompareMode.LENIENT,
+                new Customization("**.other", (actual, expected) -> true));
+        assertDoesNotThrow(() -> JSONAssert.assertEquals(
+                "[{\"id\":\"a\"},{\"id\":\"b\"}]", "[{\"id\":\"b\"},{\"id\":\"a\"}]", custom));
+        assertThrows(AssertionError.class, () -> JSONAssert.assertEquals(
+                "[{\"id\":\"a\"}]", "[{\"id\":\"b\"}]", custom));
+    }
+
+    @Test void fallsBackWhenNoUniqueKeyOrActualContainsNonObject() {
+        assertDoesNotThrow(() -> JSONAssert.assertEquals(
+                "[{\"id\":\"a\"},{\"id\":\"a\"}]", "[{\"id\":\"a\"},{\"id\":\"a\"}]", comparator(JSONCompareMode.LENIENT)));
+        assertThrows(AssertionError.class, () -> JSONAssert.assertEquals(
+                "[{\"id\":\"a\"}]", "[1]", comparator(JSONCompareMode.LENIENT)));
+    }
+
+    @Test void pathSpecificCustomizationAppliesOnlyToSelectedObject() {
+        CustomComparator custom = new CustomComparator(JSONCompareMode.LENIENT,
+                new Customization("items[id=b].id", (actual, expected) -> true));
+        assertDoesNotThrow(() -> JSONAssert.assertEquals(
+                "{\"items\":[{\"id\":\"a\"},{\"id\":\"b\"}]}",
+                "{\"items\":[{\"id\":\"a\"},{\"id\":\"x\"}]}", custom));
+        assertThrows(AssertionError.class, () -> JSONAssert.assertEquals(
+                "{\"items\":[{\"id\":\"a\"},{\"id\":\"b\"}]}",
+                "{\"items\":[{\"id\":\"x\"},{\"id\":\"y\"}]}", custom));
+    }
+
+    @Test void overlappingCandidatesCannotBeReused() {
+        CustomComparator custom = new CustomComparator(JSONCompareMode.LENIENT,
+                new Customization("**.id", (actual, expected) -> "x".equals(actual)));
+        assertThrows(AssertionError.class, () -> JSONAssert.assertEquals(
+                "[{\"id\":\"a\"},{\"id\":\"b\"}]", "[{\"id\":\"x\"},{\"id\":\"y\"}]", custom));
+    }
 }
