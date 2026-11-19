@@ -37,6 +37,8 @@ public class JSONArrayWithNullTest {
             assertFalse(JSONCompare.compareJSON("[null,null,{}]", "[null,{},{}]", mode).passed());
             assertFalse(JSONCompare.compareJSON("[null,{},{}]", "[null,null,{}]", mode).passed());
             assertTrue(JSONCompare.compareJSON("[null,null,{}]", "[null,{},null]", mode).passed());
+            assertTrue(JSONCompare.compareJSON("[null,{}]", "[{},null]", mode).passed());
+            assertTrue(JSONCompare.compareJSON("[{},null]", "[null,{}]", mode).passed());
             assertFalse(JSONCompare.compareJSON("[[null,null,{}],1]", "[1,[null,{},{}]]", mode).passed());
         }
     }
