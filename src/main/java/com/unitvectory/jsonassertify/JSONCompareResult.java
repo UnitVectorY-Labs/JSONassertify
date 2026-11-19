@@ -273,7 +273,7 @@ public class JSONCompareResult {
         } else if (value instanceof JSONObject) {
             return "a JSON object";
         } else {
-            return value.toString();
+            return String.valueOf(value);
         }
     }
 
