@@ -110,8 +110,9 @@ public final class JSONCompareUtil {
                 JSONObject o = (JSONObject) item;
                 if (o.has(candidate)) {
                     Object value = o.get(candidate);
-                    if (isSimpleValue(value) && !seenValues.contains(value)) {
-                        seenValues.add(value);
+                    Object comparisonKey = numericKey(value);
+                    if (isSimpleValue(value) && !seenValues.contains(comparisonKey)) {
+                        seenValues.add(comparisonKey);
                     } else {
                         return false;
                     }
@@ -251,6 +252,42 @@ public final class JSONCompareUtil {
      */
     public static String formatUniqueKey(String key, String uniqueKey, Object value) {
         return key + "[" + uniqueKey + "=" + value + "]";
+    }
+
+    // Use the same double equality as DefaultComparator while keeping the original
+    // value available for diagnostics. Normalize signed zero, which compares equal.
+    static Object numericKey(Object value) {
+        return value instanceof Number ? new NumericKey((Number) value) : value;
+    }
+
+    static Object originalValue(Object value) {
+        return value instanceof NumericKey ? ((NumericKey) value).value : value;
+    }
+
+    private static final class NumericKey {
+        private final Number value;
+        private final double number;
+
+        NumericKey(Number value) {
+            this.value = value;
+            double converted = value.doubleValue();
+            this.number = converted == 0.0 ? 0.0 : converted;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other instanceof NumericKey && number == ((NumericKey) other).number;
+        }
+
+        @Override
+        public int hashCode() {
+            return Double.valueOf(number).hashCode();
+        }
+
+        @Override
+        public String toString() {
+            return value.toString();
+        }
     }
 
     /**
