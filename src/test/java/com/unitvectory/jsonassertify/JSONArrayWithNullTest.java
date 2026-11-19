@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@code JSONArray}.
@@ -26,6 +27,22 @@ import org.junit.jupiter.api.Test;
  * @author Solomon Duskis
  */
 public class JSONArrayWithNullTest {
+
+    @Test
+    public void strictNullMismatchesReportFailures() {
+        JSONCompareResult expectedNull = JSONCompare.compareJSON("[null]", "[1]", JSONCompareMode.STRICT);
+        JSONCompareResult actualNull = JSONCompare.compareJSON("[1]", "[null]", JSONCompareMode.STRICT);
+
+        assertTrue(expectedNull.failed());
+        assertEquals("[0]\nExpected: null\n     got: 1\n", expectedNull.getMessage());
+        assertEquals(1, expectedNull.getFieldFailures().size());
+        assertEquals("[0]", expectedNull.getFieldFailures().get(0).getField());
+        assertTrue(actualNull.failed());
+        assertEquals("[0]\nExpected: 1\n     got: null\n", actualNull.getMessage());
+        assertEquals(1, actualNull.getFieldFailures().size());
+        assertTrue(JSONCompare.compareJSON("[null]", "[null]", JSONCompareMode.STRICT).passed());
+        assertTrue(JSONCompare.compareJSON("[1]", "[2]", JSONCompareMode.STRICT).failed());
+    }
 
     @Test
     public void testJSONArrayWithNullValue() throws JSONException {
