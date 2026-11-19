@@ -240,8 +240,7 @@ public abstract class AbstractComparator implements JSONComparator {
                     matchFound = true;
                     break;
                 }
-                if ((expectedElement == null && actualElement != null)
-                        || (expectedElement != null && actualElement == null)) {
+                if (expectedElement == null || actualElement == null) {
                     continue;
                 }
                 if (expectedElement instanceof Number && actualElement instanceof Number) {

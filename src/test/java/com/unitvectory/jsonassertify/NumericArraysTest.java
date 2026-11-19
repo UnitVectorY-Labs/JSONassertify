@@ -30,6 +30,15 @@ class NumericArraysTest {
     }
 
     @Test
+    void mixedArraysMatchNullsAndValuesOnlyOnce() {
+        assertDoesNotThrow(() -> JSONAssert.assertEquals("[null,1,{}]", "[1.0,{},null]", JSONCompareMode.LENIENT));
+        assertThrows(AssertionError.class, () -> JSONAssert.assertEquals("[null,1,{}]", "[1.0,{},2]", JSONCompareMode.LENIENT));
+        assertThrows(AssertionError.class, () -> JSONAssert.assertEquals("[1,null,{}]", "[null,null,{}]", JSONCompareMode.LENIENT));
+        assertThrows(AssertionError.class, () -> JSONAssert.assertEquals("[null,null,{}]", "[null,1,{}]", JSONCompareMode.LENIENT));
+        assertDoesNotThrow(() -> JSONAssert.assertEquals("[1,2,\"a\",{}]", "[2.0,1.0,\"a\",{}]", JSONCompareMode.LENIENT));
+    }
+
+    @Test
     void orderedArraysAndFieldsStillCompareNumbers() {
         assertDoesNotThrow(() -> JSONAssert.assertEquals("[1,1e2,{\"id\":1}]", "[1.0,100,{\"id\":1.0}]", JSONCompareMode.STRICT_ORDER));
         assertDoesNotThrow(() -> JSONAssert.assertEquals("{\"id\":1,\"n\":1e2}", "{\"id\":1.0,\"n\":100}", JSONCompareMode.LENIENT));
