@@ -24,6 +24,19 @@ import org.junit.jupiter.api.Test;
 public class JSONCompareResultTest {
 
     @Test
+    public void nullValuesCanBeDescribedInAllFailureTypes() {
+        JSONCompareResult result = new JSONCompareResult();
+        result.fail("field", null, 1);
+        result.missing("missing", null);
+        result.unexpected("unexpected", null);
+        assertEquals("field\nExpected: null\n     got: 1\n ; "
+                + "missing\nExpected: null\n     but none found\n ; "
+                + "unexpected\nUnexpected: null\n", result.getMessage());
+        assertNull(result.getFieldFailures().get(0).getExpected());
+        assertEquals(1, result.getFieldFailures().get(0).getActual());
+    }
+
+    @Test
     public void testToStringWithFailure() throws JSONException {
         JSONCompareResult result = JSONCompare.compareJSON("{id:1}", "{id:2}", JSONCompareMode.STRICT);
         assertTrue(result.failed());
