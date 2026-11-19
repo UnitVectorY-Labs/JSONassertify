@@ -41,16 +41,23 @@ public class JSONParser {
   }
 
   /**
-   * Takes a JSON string and returns either a {@link org.json.JSONObject} or
-   * {@link org.json.JSONArray},
-   * depending on whether the string represents an object or an array.
+   * Takes a JSON string and returns a {@link org.json.JSONObject},
+   * {@link org.json.JSONArray}, or {@link org.json.JSONString} for a scalar.
    *
    * @param s Raw JSON string to be parsed
-   * @return JSONObject or JSONArray
+   * @return the parsed object, array, or scalar
    * @throws JSONException JSON parsing error
    */
   public static Object parseJSON(final String s) throws JSONException {
-    if (s.trim().startsWith("{")) {
+    final String trimmed = s.trim();
+    if (trimmed.equals("true") || trimmed.equals("false") || trimmed.equals("null")) {
+      return new JSONString() {
+        @Override
+        public String toJSONString() {
+          return trimmed;
+        }
+      };
+    } else if (s.trim().startsWith("{")) {
       return new JSONObject(s);
     } else if (s.trim().startsWith("[")) {
       return new JSONArray(s);
