@@ -45,6 +45,24 @@ public class ArrayValueMatcherTest {
 	private static final String ARRAY_OF_JSONARRAYS = "{a:[[6,7,8],[9,10,11],[12,13,14],[19,20,21,22]]}";
 	private static final JSONComparator comparator = new DefaultComparator(JSONCompareMode.LENIENT);
 
+	@Test
+	public void emptyExpectedArrayFailsForSelectedActualElements() {
+		for (ArrayValueMatcher<Object> matcher : java.util.Arrays.asList(
+				new ArrayValueMatcher<Object>(comparator), new ArrayValueMatcher<Object>(comparator, 1, 1))) {
+			CustomComparator custom = new CustomComparator(JSONCompareMode.STRICT, new Customization("a", matcher));
+			JSONCompareResult result = JSONCompare.compareJSON("{a:[]}", "{a:[{},{}]}", custom);
+			assertTrue(result.failed());
+			assertEquals(1, result.getFieldFailures().size());
+			assertEquals("a", result.getFieldFailures().get(0).getField());
+		}
+	}
+
+	@Test
+	public void emptyExpectedArrayMatchesWhenNoActualElementsAreSelected() {
+		doTest("a", new ArrayValueMatcher<Object>(comparator), "{a:[]}", "{a:[]}");
+		doTest("a", new ArrayValueMatcher<Object>(comparator, 2, 3), "{a:[]}", "{a:[1,2]}");
+	}
+
 	private void doTest(String jsonPath, ArrayValueMatcher<Object> arrayValueMatcher, String expectedJSON,
 			String actualJSON) throws JSONException {
 		Customization customization = new Customization(jsonPath, arrayValueMatcher);
