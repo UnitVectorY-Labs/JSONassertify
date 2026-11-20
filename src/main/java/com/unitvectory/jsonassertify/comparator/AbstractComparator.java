@@ -129,8 +129,8 @@ public abstract class AbstractComparator implements JSONComparator {
             recursivelyCompareJSONArray(key, expected, actual, result);
             return;
         }
-        Map<Object, JSONObject> expectedValueMap = arrayOfJsonObjectToMap(expected, uniqueKey);
-        Map<Object, JSONObject> actualValueMap = arrayOfJsonObjectToMap(actual, uniqueKey);
+        Map<Object, JSONObject> expectedValueMap = numericKeyMap(expected, uniqueKey);
+        Map<Object, JSONObject> actualValueMap = numericKeyMap(actual, uniqueKey);
         for (Object id : expectedValueMap.keySet()) {
             if (!actualValueMap.containsKey(id)) {
                 result.missing(formatUniqueKey(key, uniqueKey, id), expectedValueMap.get(id));
@@ -147,23 +147,40 @@ public abstract class AbstractComparator implements JSONComparator {
         }
     }
 
+    private Map<Object, JSONObject> numericKeyMap(JSONArray array, String uniqueKey) {
+        Map<Object, JSONObject> result = new HashMap<Object, JSONObject>();
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject object = array.getJSONObject(i);
+            result.put(numericKey(object.get(uniqueKey)), object);
+        }
+        return result;
+    }
+
+    private Map<Object, Integer> numericCardinalityMap(JSONArray array) {
+        List<Object> keys = new ArrayList<Object>();
+        for (Object value : jsonArrayToList(array)) {
+            keys.add(numericKey(value));
+        }
+        return getCardinalityMap(keys);
+    }
+
     /**
      * Compares JSON object provided to the expected JSON object using provided
      * comparator, and returns the results of the comparison.
-     * 
-     * @param key      Key to use
+     *
+     * @param key Key to use
      * @param expected Expected JSON object
-     * @param actual   Actual JSON object
-     * @param result   Result of the comparison
+     * @param actual Actual JSON object
+     * @param result Result of the comparison
      * @throws JSONException JSON parsing error
      */
     protected void compareJSONArrayOfSimpleValues(String key, JSONArray expected, JSONArray actual,
             JSONCompareResult result) throws JSONException {
-        Map<Object, Integer> expectedCount = JSONCompareUtil.getCardinalityMap(jsonArrayToList(expected));
-        Map<Object, Integer> actualCount = JSONCompareUtil.getCardinalityMap(jsonArrayToList(actual));
+        Map<Object, Integer> expectedCount = numericCardinalityMap(expected);
+        Map<Object, Integer> actualCount = numericCardinalityMap(actual);
         for (Object o : expectedCount.keySet()) {
             if (!actualCount.containsKey(o)) {
-                result.missing(key + "[]", o);
+                result.missing(key + "[]", originalValue(o));
             } else if (!actualCount.get(o).equals(expectedCount.get(o))) {
                 result.fail(key + "[]: Expected " + expectedCount.get(o) + " occurrence(s) of " + o
                         + " but got " + actualCount.get(o) + " occurrence(s)");
@@ -171,7 +188,7 @@ public abstract class AbstractComparator implements JSONComparator {
         }
         for (Object o : actualCount.keySet()) {
             if (!expectedCount.containsKey(o)) {
-                result.unexpected(key + "[]", o);
+                result.unexpected(key + "[]", originalValue(o));
             }
         }
     }
@@ -214,26 +231,41 @@ public abstract class AbstractComparator implements JSONComparator {
             Object expectedElement = JSONCompareUtil.getObjectOrNull(expected, i);
             boolean matchFound = false;
             for (int j = 0; j < actual.length(); ++j) {
+                if (matched.contains(j)) {
+                    continue;
+                }
                 Object actualElement = JSONCompareUtil.getObjectOrNull(actual, j);
                 if (expectedElement == actualElement) {
+                    matched.add(j);
                     matchFound = true;
                     break;
                 }
-                if ((expectedElement == null && actualElement != null)
-                        || (expectedElement != null && actualElement == null)) {
+                if (expectedElement == null || actualElement == null) {
                     continue;
                 }
-                if (matched.contains(j) || !actualElement.getClass().equals(expectedElement.getClass())) {
+                if (expectedElement instanceof Number && actualElement instanceof Number) {
+                    if (((Number) expectedElement).doubleValue() == ((Number) actualElement).doubleValue()) {
+                        matched.add(j);
+                        matchFound = true;
+                        break;
+                    }
+                    continue;
+                }
+                if (!actualElement.getClass().equals(expectedElement.getClass())) {
                     continue;
                 }
                 if (expectedElement instanceof JSONObject) {
-                    if (compareJSON((JSONObject) expectedElement, (JSONObject) actualElement).passed()) {
+                    JSONCompareResult candidateResult = new JSONCompareResult();
+                    compareJSON(key + "[" + i + "]", (JSONObject) expectedElement, (JSONObject) actualElement, candidateResult);
+                    if (candidateResult.passed()) {
                         matched.add(j);
                         matchFound = true;
                         break;
                     }
                 } else if (expectedElement instanceof JSONArray) {
-                    if (compareJSON((JSONArray) expectedElement, (JSONArray) actualElement).passed()) {
+                    JSONCompareResult candidateResult = new JSONCompareResult();
+                    compareJSONArray(key + "[" + i + "]", (JSONArray) expectedElement, (JSONArray) actualElement, candidateResult);
+                    if (candidateResult.passed()) {
                         matched.add(j);
                         matchFound = true;
                         break;

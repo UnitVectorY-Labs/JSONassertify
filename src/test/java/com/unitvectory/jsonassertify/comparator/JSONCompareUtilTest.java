@@ -64,6 +64,24 @@ public class JSONCompareUtilTest {
     }
 
     @Test
+    public void testObjectArrayMapPreservesOriginalKeysAndObjects() {
+        JSONArray array = new JSONArray("[{\"id\":1,\"value\":\"a\"},{\"id\":2,\"value\":\"b\"}]");
+        Map<Object, org.json.JSONObject> objects = JSONCompareUtil.arrayOfJsonObjectToMap(array, "id");
+        assertEquals(2, objects.size());
+        assertEquals("a", objects.get(1).getString("value"));
+        assertEquals("b", objects.get(2).getString("value"));
+    }
+
+    @Test
+    public void testNumericKeysRespectNumericEquality() {
+        Object one = JSONCompareUtil.numericKey(1);
+        assertEquals(one, JSONCompareUtil.numericKey(1.0));
+        assertEquals(one.hashCode(), JSONCompareUtil.numericKey(1.0).hashCode());
+        assertFalse(one.equals(JSONCompareUtil.numericKey(2)));
+        assertFalse(one.equals("1"));
+    }
+
+    @Test
     public void testAllJSONArraysTrue() throws Exception {
         JSONArray array = new JSONArray();
         array.put(new JSONArray("[1,2]"));
