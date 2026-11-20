@@ -129,7 +129,7 @@ public class DefaultComparator extends AbstractComparator {
         try {
             return new BigDecimal(expectedValue.toString()).compareTo(new BigDecimal(actualValue.toString())) != 0;
         } catch (NumberFormatException e) {
-            // Preserve the existing behavior for non-finite or custom Number values.
+            // Fall back to double comparison when either value cannot be parsed as a decimal.
             return ((Number) expectedValue).doubleValue() != ((Number) actualValue).doubleValue();
         }
     }
