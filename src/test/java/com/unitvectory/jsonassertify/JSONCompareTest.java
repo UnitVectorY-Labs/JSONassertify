@@ -18,6 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static com.unitvectory.jsonassertify.JSONCompare.compareJSON;
 import static com.unitvectory.jsonassertify.JSONCompareMode.LENIENT;
 import static com.unitvectory.jsonassertify.JSONCompareMode.NON_EXTENSIBLE;
@@ -36,6 +37,28 @@ import org.junit.jupiter.api.Test;
  * @author Solomon Duskis
  */
 public class JSONCompareTest {
+    @Test
+    public void reportsTopLevelScalarMismatches() {
+        assertScalarMismatch("\"expected\"", "\"actual\"");
+        assertScalarMismatch("1", "2");
+    }
+
+    private void assertScalarMismatch(String expected, String actual) {
+        String message = "\nExpected: " + expected + "\n     got: " + actual + "\n";
+        JSONCompareResult result = compareJSON(expected, actual, JSONCompareMode.STRICT);
+        assertTrue(result.failed());
+        assertEquals(message, result.getMessage());
+        AssertionError error = assertThrows(AssertionError.class,
+                () -> JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT));
+        assertEquals(message, error.getMessage());
+    }
+
+    @Test
+    public void equalTopLevelScalarsStillPass() {
+        assertTrue(compareJSON("\"same\"", "\"same\"", JSONCompareMode.STRICT).passed());
+        assertTrue(compareJSON("1", "1", JSONCompareMode.STRICT).passed());
+    }
+
     @Test
     public void succeedsWithEmptyArrays() throws JSONException {
         assertTrue(compareJSON("[]", "[]", LENIENT).passed());

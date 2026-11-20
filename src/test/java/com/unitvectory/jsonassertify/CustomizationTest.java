@@ -67,6 +67,37 @@ public class CustomizationTest {
     }
 
     @Test
+    public void testTerminalAndStandaloneWildcards() {
+        Customization single = new Customization("user.*", (a, b) -> true);
+        assertTrue(single.appliesToPath("user.name"));
+        assertFalse(single.appliesToPath("user.profile.name"));
+        assertFalse(single.appliesToPath("user."));
+
+        Customization doubleWildcard = new Customization("user.**", (a, b) -> true);
+        assertTrue(doubleWildcard.appliesToPath("user.name"));
+        assertTrue(doubleWildcard.appliesToPath("user.profile.name"));
+        assertFalse(doubleWildcard.appliesToPath("user."));
+
+        Customization rootSingle = new Customization("*", (a, b) -> true);
+        assertTrue(rootSingle.appliesToPath("name"));
+        assertFalse(rootSingle.appliesToPath("user.name"));
+        assertFalse(rootSingle.appliesToPath(""));
+
+        Customization rootDouble = new Customization("**", (a, b) -> true);
+        assertTrue(rootDouble.appliesToPath("name"));
+        assertTrue(rootDouble.appliesToPath("user.name"));
+        assertFalse(rootDouble.appliesToPath(""));
+    }
+
+    @Test
+    public void testConsecutiveAndLiteralPatternParts() {
+        Customization customization = new Customization("a+.*.**", (a, b) -> true);
+        assertTrue(customization.appliesToPath("a+.b.c.d"));
+        assertFalse(customization.appliesToPath("aaa.b.c.d"));
+        assertFalse(customization.appliesToPath("a+.b."));
+    }
+
+    @Test
     public void testMatchesWithLocationAwareValueMatcher() throws JSONException {
         LocationAwareValueMatcher<Object> matcher = new LocationAwareValueMatcher<Object>() {
             @Override
