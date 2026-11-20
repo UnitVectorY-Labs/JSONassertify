@@ -13,6 +13,8 @@
 */
 package com.unitvectory.jsonassertify.comparator;
 
+import java.math.BigDecimal;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -125,6 +127,11 @@ public class DefaultComparator extends AbstractComparator {
      *         otherwise
      */
     protected boolean areNotSameDoubles(Object expectedValue, Object actualValue) {
-        return ((Number) expectedValue).doubleValue() != ((Number) actualValue).doubleValue();
+        try {
+            return new BigDecimal(expectedValue.toString()).compareTo(new BigDecimal(actualValue.toString())) != 0;
+        } catch (NumberFormatException e) {
+            // Fall back to double comparison when either value cannot be parsed as a decimal.
+            return ((Number) expectedValue).doubleValue() != ((Number) actualValue).doubleValue();
+        }
     }
 }
