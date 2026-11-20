@@ -118,7 +118,7 @@ public final class JSONCompare {
         final String expectedJson = expected.toJSONString();
         final String actualJson = actual.toJSONString();
         if (!expectedJson.equals(actualJson)) {
-            result.fail("");
+            result.fail("", expectedJson, actualJson);
         }
         return result;
     }
