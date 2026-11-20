@@ -281,7 +281,7 @@ public final class JSONCompareUtil {
 
         @Override
         public int hashCode() {
-            return Double.valueOf(number).hashCode();
+            return Double.hashCode(number);
         }
 
         @Override
