@@ -74,7 +74,7 @@ public final class Customization {
 
 	private String buildPattern(String path, String regex, String replacement, int level) {
 		StringBuilder sb = new StringBuilder();
-		String[] parts = path.split(regex);
+		String[] parts = path.split(regex, -1);
 		for (int i = 0; i < parts.length; i++) {
 			sb.append(buildPatternForLevel(level, parts[i]));
 			if (i < parts.length - 1) {

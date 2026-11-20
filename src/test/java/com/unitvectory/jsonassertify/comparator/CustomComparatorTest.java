@@ -64,4 +64,11 @@ public class CustomComparatorTest {
         JSONCompareResult result = JSONCompare.compareJSON("{id:1}", "{id:1}", comparator);
         assertTrue(result.failed());
     }
+
+    @Test
+    public void testTerminalWildcardSelectsMatcher() throws JSONException {
+        CustomComparator comparator = new CustomComparator(JSONCompareMode.STRICT,
+                new Customization("user.*", (actual, expected) -> true));
+        assertTrue(JSONCompare.compareJSON("{user:{name:'expected'}}", "{user:{name:'actual'}}", comparator).passed());
+    }
 }

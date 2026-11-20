@@ -26,6 +26,8 @@ import com.unitvectory.jsonassertify.comparator.JSONComparator;
  * process loops through the expected array to get expected elements for the
  * additional actual elements. In general the expected array will contain a
  * single element which is matched against each actual array element in turn.
+ * An empty expected array fails to match if the selected range contains any
+ * actual elements.
  * This allows simple verification of constant array element components and
  * coupled with RegularExpressionValueMatcher can be used to match specific
  * array element components against a regular expression pattern. As a
@@ -260,6 +262,9 @@ public class ArrayValueMatcher<T> implements LocationAwareValueMatcher<T> {
 			int first = Math.max(0, from);
 			int last = Math.min(actualArray.length() - 1, to);
 			int expectedLen = expectedArray.length();
+			if (expectedLen == 0 && first <= last) {
+				return false;
+			}
 			for (int i = first; i <= last; i++) {
 				String elementPrefix = MessageFormat.format("{0}[{1}]", prefix, i);
 				Object actualElement = actualArray.get(i);
