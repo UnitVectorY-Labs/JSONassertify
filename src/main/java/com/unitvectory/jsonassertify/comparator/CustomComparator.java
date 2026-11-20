@@ -97,9 +97,21 @@ public class CustomComparator extends DefaultComparator {
         int[] assigned = new int[size];
         Arrays.fill(assigned, -1);
         for (int i = 0; i < size; i++) {
-            if (!assignMatch(i, matches, assigned, new boolean[size])) {
-                result.fail(key + "[" + i + "] Could not find match for element " + expected.get(i));
-                return;
+            assignMatch(i, matches, assigned, new boolean[size]);
+        }
+        boolean[] matchedExpected = new boolean[size];
+        for (int j = 0; j < size; j++) {
+            if (assigned[j] >= 0) {
+                matchedExpected[assigned[j]] = true;
+            } else {
+                JSONObject object = actual.getJSONObject(j);
+                result.unexpected(formatUniqueKey(key, uniqueKey, object.opt(uniqueKey)), object);
+            }
+        }
+        for (int i = 0; i < size; i++) {
+            if (!matchedExpected[i]) {
+                JSONObject object = expected.getJSONObject(i);
+                result.missing(formatUniqueKey(key, uniqueKey, object.get(uniqueKey)), object);
             }
         }
     }

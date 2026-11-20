@@ -82,4 +82,14 @@ class CustomizationAuditTest {
         assertThrows(AssertionError.class, () -> JSONAssert.assertEquals(
                 "[{\"id\":\"a\"},{\"id\":\"b\"}]", "[{\"id\":\"x\"},{\"id\":\"y\"}]", custom));
     }
+    @Test void unmatchedObjectsRetainStructuredUniqueKeyDiagnostics() {
+        JSONCompareResult result = JSONCompare.compareJSON(
+                "[{\"id\":\"a\",\"value\":1},{\"id\":\"b\",\"value\":2}]",
+                "[{\"id\":\"x\",\"value\":1},{\"id\":\"y\",\"value\":3}]",
+                comparator(JSONCompareMode.LENIENT));
+        org.junit.jupiter.api.Assertions.assertEquals(1, result.getFieldMissing().size());
+        org.junit.jupiter.api.Assertions.assertEquals("[id=b]", result.getFieldMissing().get(0).getField());
+        org.junit.jupiter.api.Assertions.assertEquals(1, result.getFieldUnexpected().size());
+        org.junit.jupiter.api.Assertions.assertEquals("[id=y]", result.getFieldUnexpected().get(0).getField());
+    }
 }
