@@ -5,6 +5,10 @@ config:
   license: Apache-2.0
   language: java17
   release: none
+  maven:
+    group_id: com.unitvectory
+    artifact_id: jsonassertify
+    javadoc: true
   release_github: true
   status: active
   osv: sarif
