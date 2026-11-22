@@ -1,0 +1,39 @@
+name: JSONassertify
+default_branch: main
+config:
+  description: "Write JSON unit tests in less code. Great for testing REST interfaces."
+  license: Apache-2.0
+  language: java17
+  release: none
+  release_github: true
+  status: active
+  osv: sarif
+  codecov:
+    enabled: true
+    token: AkErQGHlR1
+  docs:
+    enabled: true
+    domain: jsonassertify.unitvectorylabs.com
+  gitignore:
+    - target/
+    - '*.class'
+    - hs_err_pid*
+    - replay_pid*
+    - pom.xml.tag
+    - pom.xml.releaseBackup
+    - pom.xml.versionsBackup
+    - pom.xml.next
+    - release.properties
+    - dependency-reduced-pom.xml
+    - buildNumber.properties
+    - .mvn/timing.properties
+    - /.apt_generated_tests/
+    - /bin/
+    - /out/
+    - .classpath
+    - .project
+    - .settings/
+    - .metadata
+    - .factorypath
+    - /.idea/
+    - '*.iml'

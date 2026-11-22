@@ -1,9 +1,10 @@
-[![GitHub release](https://img.shields.io/github/release/UnitVectorY-Labs/JSONassertify.svg)](https://github.com/UnitVectorY-Labs/JSONassertify/releases/latest) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Active](https://img.shields.io/badge/Status-Active-green)](https://unitvectory-labs.github.io/uvy-labs-guide/bestpractices/status/#active) [![Maven Central](https://img.shields.io/maven-central/v/com.unitvectory/jsonassertify)](https://central.sonatype.com/artifact/com.unitvectory/jsonassertify) [![javadoc](https://javadoc.io/badge2/com.unitvectory/jsonassertify/javadoc.svg)](https://javadoc.io/doc/com.unitvectory/jsonassertify) [![codecov](https://codecov.io/gh/UnitVectorY-Labs/JSONassertify/graph/badge.svg?token=AkErQGHlR1)](https://codecov.io/gh/UnitVectorY-Labs/JSONassertify)
+[![GitHub release](https://img.shields.io/github/release/UnitVectorY-Labs/JSONassertify.svg)](https://github.com/UnitVectorY-Labs/JSONassertify/releases/latest) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Active](https://img.shields.io/badge/Status-Active-green)](https://guide.unitvectorylabs.com/bestpractices/status/#active) [![codecov](https://codecov.io/gh/UnitVectorY-Labs/JSONassertify/graph/badge.svg?token=AkErQGHlR1)](https://codecov.io/gh/UnitVectorY-Labs/JSONassertify) 
 
-JSONassertify
-=============
+# JSONassertify
 
-Write JSON unit tests in less code.  Great for testing REST interfaces.
+Write JSON unit tests in less code. Great for testing REST interfaces.
+
+[![Maven Central](https://img.shields.io/maven-central/v/com.unitvectory/jsonassertify)](https://central.sonatype.com/artifact/com.unitvectory/jsonassertify) [![javadoc](https://javadoc.io/badge2/com.unitvectory/jsonassertify/javadoc.svg)](https://javadoc.io/doc/com.unitvectory/jsonassertify)
 
 JSONassertify: A Fork of JSONassert
 -----------------------------------
