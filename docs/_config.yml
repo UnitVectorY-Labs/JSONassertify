@@ -1,14 +1,35 @@
 title: JSONassertify
-description: "Write JSON unit tests in less code.  Great for testing REST interfaces."
+description: "Write JSON unit tests in less code. Great for testing REST interfaces."
 
-remote_theme: just-the-docs/just-the-docs@v0.12.0
+remote_theme: UnitVectorY-Labs/uvy-docs-theme@v0.2.0
 plugins:
   - jekyll-remote-theme
 
-# Aux links for the upper right navigation
-aux_links:
-  "JSONassertify on GitHub":
-    - "https://github.com/UnitVectorY-Labs/JSONassertify"
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
+
+mermaid:
+  # Version of mermaid library
+  # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
+  version: "12.3.0" # MERMAIDVERSION
+
+# External navigation links
+nav_external_links:
+  - title: JSONassertify on GitHub
+    url: https://github.com/UnitVectorY-Labs/JSONassertify
 
 # Footer "Edit this page on GitHub" link text
 gh_edit_link: true
@@ -17,13 +38,3 @@ gh_edit_repository: "https://github.com/UnitVectorY-Labs/JSONassertify"
 gh_edit_branch: "main"
 gh_edit_source: "docs"
 gh_edit_view_mode: "tree"
-
-# Navigation links
-nav_external_links:
-  - title: Java Docs
-    url: https://javadoc.io/doc/com.unitvectory/jsonassertify/latest/index.html
-    opens_in_new_tab: true
-  - title: Maven Central
-    url: https://central.sonatype.com/artifact/com.unitvectory/jsonassertify
-    opens_in_new_tab: true
-
