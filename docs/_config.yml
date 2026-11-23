@@ -1,9 +1,13 @@
 title: JSONassertify
 description: "Write JSON unit tests in less code. Great for testing REST interfaces."
 
-remote_theme: UnitVectorY-Labs/uvy-docs-theme@v0.2.0
+remote_theme: UnitVectorY-Labs/uvy-docs-theme@v0.4.0
 plugins:
   - jekyll-remote-theme
+
+uvy_docs:
+  license: "Apache-2.0 License"
+  license_url: "https://github.com/UnitVectorY-Labs/JSONassertify/blob/main/LICENSE"
 
 callouts:
   highlight:
